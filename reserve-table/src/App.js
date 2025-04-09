@@ -4,7 +4,10 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Th the reservation page</h1>
+      <Headers></Headers>
+      <Nav></Nav>
+      <Main></Main>
+      <Footer></Footer>
     </div>
   );
 }
