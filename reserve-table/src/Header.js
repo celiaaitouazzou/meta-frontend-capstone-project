@@ -1,13 +1,11 @@
-import logo from './Logo.svg';
-import Nav from './Nav.js';
+import React from 'react'
 
-function Header(){
-    return  (
-    <header>
-        <img src = {logo} ></img>
-        <Nav></Nav>
+function Header() {
+  return (
+    <header className='bg-dark-bckground sticky top-0 z-[20] mx-auto flex w-full items-center justify-between'>
+
     </header>
-);
+  )
 }
 
-export default Header;
+export default Header
