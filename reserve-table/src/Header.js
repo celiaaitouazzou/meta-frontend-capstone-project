@@ -17,29 +17,29 @@ const Header = () => {
       <Container>
         <Toolbar>
           <Stack
-            direction="row"
+            sx={{direction:{xs:"column",sm:"column",md:"row",lg:"row",xl:"row"}}}
             justifyContent="space-around"
             alignItems="center"
             width="100%"
           >
             <Logo></Logo>
             <Stack direction="row" gap={3}>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none' >
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none' >
               <NavLink to='/'>HOME</NavLink>
             </Link>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none'>
               <NavLink to='/About'>ABOUT</NavLink>
             </Link>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none'>
               <NavLink to='/Menu'>MENU</NavLink>
             </Link>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none'>
               <NavLink to='/Reservation'>RESERVATION</NavLink>
             </Link>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none'>
               <NavLink to='/OrderOnline'>ORDER ONLINE</NavLink>
             </Link>
-            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+            <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none'>
               <NavLink to='/Login'>LOGIN</NavLink>
             </Link>
             </Stack>
