@@ -23,7 +23,7 @@ const Header = () => {
             width="100%"
           >
             <Logo></Logo>
-            <Stack direction="row" gap={3}>
+            <Stack sx={{direction:{xs:"column",sm:"column",md:"row",lg:"row",xl:"row"}}} gap={3}>
             <Link sx={{color: "black", fontFamily: 'Karla, sans-serif'}} underline='none' >
               <NavLink to='/'>HOME</NavLink>
             </Link>
