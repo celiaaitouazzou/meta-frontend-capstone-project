@@ -1,11 +1,53 @@
-import React from 'react'
 
-function Header() {
-  return (
-    <header className='bg-dark-bckground sticky top-0 z-[20] mx-auto flex w-full items-center justify-between'>
+import {
+  Stack,
+  Link,
+  Toolbar,
+  Container,
+  AppBar,
+} from "@mui/material";
+import Logo from './Logo';
+import '@fontsource/karla'
+import { NavLink } from 'react-router-dom';
 
-    </header>
-  )
+const Header = () => {
+
+  return(
+    <AppBar color="white">
+      <Container>
+        <Toolbar>
+          <Stack
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+            width="100%"
+          >
+            <Logo></Logo>
+            <Stack direction="row" gap={3}>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none' >
+              <NavLink to='/'>HOME</NavLink>
+            </Link>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+              <NavLink to='/About'>ABOUT</NavLink>
+            </Link>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+              <NavLink to='/Menu'>MENU</NavLink>
+            </Link>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+              <NavLink to='/Reservation'>RESERVATION</NavLink>
+            </Link>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+              <NavLink to='/OrderOnline'>ORDER ONLINE</NavLink>
+            </Link>
+            <Link sx={{color: { xs: "primary", sm: "black" }, fontFamily: 'Karla, sans-serif'}} underline='none'>
+              <NavLink to='/Login'>LOGIN</NavLink>
+            </Link>
+            </Stack>
+          </Stack>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
 
-export default Header
+export default Header;
