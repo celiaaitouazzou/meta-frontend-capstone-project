@@ -1,8 +1,13 @@
 import React from 'react'
+import HeroSection from './Main/HeroSection'
 
 function Main() {
   return (
-    <div>Main</div>
+    <main>
+        <HeroSection />
+        <Highlight />
+    </main>
+    
   )
 }
 
