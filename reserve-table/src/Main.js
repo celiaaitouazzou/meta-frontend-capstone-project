@@ -1,5 +1,6 @@
 import React from 'react'
 import HeroSection from './Main/HeroSection'
+import Highlight from './Main/Highlight'
 
 function Main() {
   return (
@@ -7,7 +8,6 @@ function Main() {
         <HeroSection />
         <Highlight />
     </main>
-    
   )
 }
 
