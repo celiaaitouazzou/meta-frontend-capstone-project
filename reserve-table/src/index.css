@@ -13,3 +13,38 @@
   flex:2;
   gap: 1rem; /* optional spacing between items */
 }
+
+.px-2 {
+  padding: 2%;
+  width:90%;
+  text-align: justify;
+  font-size: 18px;
+}
+
+.Hero-col-1 {
+  background-color: rgba(73,94,87);
+  color: #FACE14;
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem; /* or whatever you want */
+  margin-bottom: 20%;
+}
+
+.Hero-col-2 {
+  width: 70%;
+  height: 70%;
+}
+
+
+
+
+.Hero-button {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-color: black;
+  margin-bottom: 5%;
+}
