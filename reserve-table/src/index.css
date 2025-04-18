@@ -25,12 +25,12 @@
   background-color: rgba(73,94,87);
   color: #FACE14;
   width: 100vw;
-  height: 90vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 2rem; /* or whatever you want */
-  margin-bottom: 20%;
+  margin-bottom: 40%;
 }
 
 .Hero-col-2 {
