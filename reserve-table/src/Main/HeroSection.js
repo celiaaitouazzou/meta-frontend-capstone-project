@@ -6,7 +6,8 @@ function HeroSection() {
   return (
       <Container className="d-md-flex flex-row flex-wrap flex-2 text-start px-2 text-wrap Hero-col-1" fluid="sm" >
       <Col>
-         <h1>Little Lemon</h1>
+         <h1 className='hero-h1'>Little Lemon</h1>
+         <h2 className='hero-h1'>Chicago</h2>
           <p className='px-2'>
             Tucked into the city’s edge with a breeze of coastal charm, Little Lemon is the brainchild of Italian brothers Adrian and Mario — a modern Mediterranean spot where old-world flavors meet effortlessly cool vibes.
             Think bright citrus, bold herbs, wood-fired everything, and a wine list that knows how to party.
