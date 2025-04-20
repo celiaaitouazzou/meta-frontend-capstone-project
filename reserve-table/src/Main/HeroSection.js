@@ -23,11 +23,11 @@ function HeroSection() {
         </Col>
       </Row>
     </Container>
-    <div className="d-none d-lg-block position-absolute top-0 end-0 pt-5" style={{ transform: 'translateX(-50%)' }}>
-      <Image src={hero} width={300} height={500} rounded />
+    <div className="d-none d-lg-block position-absolute top-0 end-0 pt-5" style={{ transform: 'translate( -50%, 7.5% )'}}>
+      <Image src={hero} width={300} height={450} rounded />
     </div>
     <div className="d-block d-lg-none text-center mt-3">
-      <Image src={hero} width={300} height={500} rounded />
+      <Image src={hero} width={300} height={450} rounded />
     </div>
     </div>
   )
