@@ -4,7 +4,8 @@ import hero from './hero.png';
 
 function HeroSection() {
   return (
-    <Container className="py-5" style={{backgroundColor: '#495E57'}}>
+    <div>
+      <Container className="py-5" style={{backgroundColor: '#495E57'}}>
       <Row className="align-items-center" >
         <Col xs={12} md={6} className="mb-4 mb-md-0 text-start">
           <div style={{ textAlign: 'justify', maxWidth: '600px', color: '#F4CE14'}}>
@@ -20,34 +21,15 @@ function HeroSection() {
             </Button>
           </div>
         </Col>
-        <Col
-        xs={12}
-        md={6}
-        style={{
-          position: 'relative',
-          '@media (max-width: 767.98px)': { // Styles for screens smaller than md
-            position: 'static', // Revert to normal static positioning
-          },
-        }}>
-          <div style={{
-            position: 'absolute',
-            top: '-20px',
-            left: '-15px',
-            right: '-15px',
-            bottom: '-20px',
-            '@media (max-width: 767.98px)': { // Styles for screens smaller than md
-              position: 'static', // Revert to normal static positioning
-              top: 'auto',
-              left: 'auto',
-              right: 'auto',
-              bottom: 'auto',
-            },
-          }}>
-            <Image src={hero} fluid rounded style={{ height: '500px', width: 'auto', objectFit: 'cover' }} />
-          </div>
-        </Col>
       </Row>
     </Container>
+    <div className="d-none d-lg-block position-absolute top-0 end-0 pt-5" style={{ transform: 'translateX(-50%)' }}>
+      <Image src={hero} width={300} height={500} rounded />
+    </div>
+    <div className="d-block d-lg-none text-center mt-3">
+      <Image src={hero} width={300} height={500} rounded />
+    </div>
+    </div>
   )
 }
 
