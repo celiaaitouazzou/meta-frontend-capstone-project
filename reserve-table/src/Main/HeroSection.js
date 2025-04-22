@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row , Col , Image, Container, Button } from 'react-bootstrap';
-import hero from './hero.png';
+import hero from './assets/hero.png';
 
 function HeroSection() {
   return (
