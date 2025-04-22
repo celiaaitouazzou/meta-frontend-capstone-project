@@ -7,7 +7,7 @@ function HeroSection() {
     <div>
       <Container className="py-5" style={{backgroundColor: '#495E57'}}>
       <Row className="align-items-center" >
-        <Col xs={12} md={6} className="mb-4 mb-md-0 text-start">
+        <Col xs={12} md={6} className="mb-4 mb-md-0 text-start flex-start">
           <div style={{ textAlign: 'justify', maxWidth: '600px', color: '#F4CE14'}}>
             <h1 className="display-4 text-start h2 text-start" style={{ fontFamily: "'Markazi Text', serif", color: '#F4CE14'}}>Little Lemon</h1>
             <p className="lead fs-6" style={{ textAlign: 'justify' }}>
