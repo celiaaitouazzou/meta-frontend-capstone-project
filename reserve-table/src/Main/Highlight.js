@@ -1,7 +1,31 @@
 import React from 'react'
-import { Button, Container,Row,Col } from 'react-bootstrap'
+import { Button, Container,Row,Col,Card } from 'react-bootstrap'
+import greeksalad from './assets/greeksalad.jpg'
+import bruschetta from './assets/bruschetta.png'
+import lemondessert from './assets/lemondessert.jpg'
 
 function Highlight() {
+
+  const hightLightCard = [
+    {
+      src : greeksalad,
+      title : 'Greek Salad',
+      price : '$12.00',
+      description : 'The famous greek salad of crispy lettuce, peppers, olives and our Chicago style feta cheese, garnished with crunchy garlic and rosemary croutons.',
+    },
+    {
+      src : bruschetta,
+      title : 'Bruschetta',
+      price : '$5.99',
+      description : 'Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil. ',
+    },
+    {
+      src: lemondessert,
+      title : 'Lemon Dessert',
+      price : '$5.00',
+      description : 'This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.'
+    }
+  ]
 
   return (
     <Container className='container-style'>
@@ -24,6 +48,27 @@ function Highlight() {
       </Col>
     </Row>
     <Row>
+      {hightLightCard.map((item) => {
+        return (
+        <Card style={{ width: '16rem' }}>
+        <Row>
+          <Card.Img
+            variant="top" src={item.src}
+            className="no-padding p-0 m-0 w-100"
+            style={{ height: '150px', objectFit: 'cover' }}
+            cap
+          />
+        </Row>
+        <Card.Body>
+          <Card.Title>{item.title}</Card.Title>
+          <Card.Title>{item.price}</Card.Title>
+          <Card.Text>
+            {item.description}
+          </Card.Text>
+          <Card.Link href="/OnlineMenu">Order A Delivery</Card.Link>
+        </Card.Body>
+      </Card>)
+      })}
     </Row>
     </Container>
   )

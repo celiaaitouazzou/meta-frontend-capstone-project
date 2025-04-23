@@ -1,14 +1,8 @@
 import React from 'react'
-import greeksalad from './assets/greeksalad.jpg'
+
 
 function HighlightCards(props) {
 
-  const hightLightCard = [
-    {
-      src : {greeksalad},
-      title : ''
-    }
-  ]
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={props.src} />
