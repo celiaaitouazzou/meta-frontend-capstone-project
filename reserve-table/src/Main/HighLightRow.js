@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row,Card } from 'react-bootstrap'
-import delivery from './assets/delivery.png'
+import delivery from './icons/delivery.png'
 
 function HighlightRow(props) {
 

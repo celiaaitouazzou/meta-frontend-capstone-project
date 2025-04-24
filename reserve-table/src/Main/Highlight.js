@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import { Button, Container,Row,Col} from 'react-bootstrap'
 import { CSSTransition } from 'react-transition-group';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import HighlightRow from './HighLightRow'
 import greeksalad from './assets/greeksalad.jpg'
 import bruschetta from './assets/bruschetta.png'
@@ -9,6 +11,8 @@ import lemondessert from './assets/lemondessert.jpg'
 import lasagna from './assets/lasagna.jpg'
 import pasta from './assets/pasta.jpg'
 import couscous from './assets/couscous.jpg'
+import chevrondown from './icons/chevrondown.png'
+import chevronup from './icons/chevronup.png'
 
 function Highlight() {
 
@@ -82,7 +86,19 @@ function Highlight() {
         className="btn btn-warning fw-bold px-4 py-2"
         onClick={() => setExpanded(!expanded)}
       >
-        {expanded ? 'Show Less' : 'Show More'}
+        {expanded ?
+        (
+          <>
+            Show Less
+            <img src={chevronup} height={20} width={20} className="ms-2" alt="Chevron Down" /> {/* Image when expanded is true */}
+          </>
+        ):
+        (<>
+          Show More
+          <img src={chevrondown} height={20} width={20} className="ms-2" alt="Chevron Up" /> {/* Image when expanded is false (initially show down) */}
+        </>
+        )
+        }
       </button>
     </div>
     </Container>
