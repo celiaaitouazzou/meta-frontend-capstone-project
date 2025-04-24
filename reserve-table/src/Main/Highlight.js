@@ -1,9 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState, useRef } from 'react';
 import { Button, Container,Row,Col} from 'react-bootstrap'
-import { CSSTransition } from 'react-transition-group';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import HighlightRow from './HighLightRow'
 import greeksalad from './assets/greeksalad.jpg'
 import bruschetta from './assets/bruschetta.png'
@@ -56,8 +52,21 @@ function Highlight() {
   ]
 
   const [expanded, setExpanded] = useState(false);
+  const secondRowRef = useRef(null); // Create a ref
+
   const firstRowCards = hightLightCard.slice(0, 3);
   const secondRowCards = hightLightCard.slice(3);
+
+  const handleToggleExpand = () => {
+    setExpanded(!expanded);
+
+    // Scroll to the second row after a slight delay (matching the animation)
+    setTimeout(() => {
+      if (!expanded && secondRowRef.current) {
+        secondRowRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 600); // Adjust the delay (in milliseconds) to be slightly longer than your CSS transition duration (0.5s = 500ms)
+  };
 
   return (
     <Container className='container-style'>
@@ -80,11 +89,16 @@ function Highlight() {
       </Col>
     </Row>
     <HighlightRow cards={firstRowCards}/>
-    {expanded && <HighlightRow cards={secondRowCards} />}
+
+    <div className={`highlight-row-animated ${expanded ? '' : 'highlight-row-collapsed'}`}
+      ref={secondRowRef} // Attach the ref to the container
+    >
+      {expanded && <HighlightRow cards={secondRowCards} />}
+    </div>
     <div className="text-center mt-3">
       <button
         className="btn btn-warning fw-bold px-4 py-2"
-        onClick={() => setExpanded(!expanded)}
+        onClick={handleToggleExpand} // Use the custom handler}
       >
         {expanded ?
         (

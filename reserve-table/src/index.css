@@ -15,24 +15,14 @@
   background-color: #F4CE14;
 }
 
-.fade-slide-enter {
-  opacity: 0;
-  transform: translateY(-20px);
+.highlight-row-animated {
+  max-height: 1000px; /* Set a sufficiently large initial max-height */
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out; /* Adjust duration and easing as needed */
 }
 
-.fade-slide-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms ease-out, transform 300ms ease-out;
-}
-
-.fade-slide-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-slide-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 300ms ease-in, transform 300ms ease-in;
+.highlight-row-collapsed {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out; /* Ensure transition is also defined for collapsing */
 }

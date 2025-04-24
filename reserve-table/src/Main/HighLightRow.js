@@ -9,7 +9,7 @@ function HighlightRow(props) {
       {/**/}
       {props.cards.map((item) => {
         return (
-        <Card style={{ width: '16rem' , backgroundColor:'#EDEFEE'}}>
+        <Card style={{ width: '16rem' , backgroundColor:'#EDEFEE',marginTop:"2%"}}>
         <Row>
           <Card.Img
             variant="top"
