@@ -45,7 +45,7 @@ function Highlight() {
     },
     {
       src: couscous,
-      title : 'Mediterenean Couscous',
+      title : 'Mediterranean Couscous',
       price : '$9.99',
       description: 'Fluffy golden couscous tossed with sautéed broccoli, mushrooms, and sweet corn, topped with a fiery chili-garlic glaze. Finished with fresh cilantro and whole red and green chilies for a bold, aromatic kick. A colorful, plant-powered dish with attitude.'
     }

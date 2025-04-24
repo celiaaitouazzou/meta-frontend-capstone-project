@@ -21,10 +21,10 @@ function HighlightRow(props) {
         </Row>
         <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div style={{display:'flex', justifyContent:'space-between'}}>
-            <Card.Title>{item.title}</Card.Title>
+            <Card.Title style={{fontFamily:'Markazi Text',fontWeight:'bold',fontSize:'18pt'}}>{item.title}</Card.Title>
             <Card.Title style={{color:'#EE9972'}}>{item.price}</Card.Title>
           </div>
-          <Card.Text style={{textAlign:'left'}}>
+          <Card.Text style={{textAlign:'left',lineHeight:'1.5'}}>
             {item.description}
           </Card.Text>
         <Row>
@@ -33,7 +33,7 @@ function HighlightRow(props) {
             className='text-start'
             style={{color:'#333333',textDecoration:'none',fontWeight:'bold'}}>
             Order A Delivery
-            <img src={delivery} style={{height:"20px", width:"20px"}}></img>
+            <img src={delivery} style={{height:"20px", width:"20px"}} alt='delivery icon'></img>
           </Card.Link>
         </Row>
         </Card.Body>
