@@ -59,13 +59,17 @@ function Highlight() {
             cap
           />
         </Row>
-        <Card.Body>
+        <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{display:'flex', justifyContent:'space-between'}}>
           <Card.Title>{item.title}</Card.Title>
-          <Card.Title>{item.price}</Card.Title>
-          <Card.Text>
-            {item.description}
-          </Card.Text>
-          <Card.Link href="/OnlineMenu">Order A Delivery</Card.Link>
+          <Card.Title style={{color:'#EE9972'}}>{item.price}</Card.Title>
+        </div>
+        <Card.Text style={{textAlign:'left'}}>
+          {item.description}
+        </Card.Text>
+        <Row>
+          <Card.Link href="/OnlineMenu" className='text-start' style={{color:'#333333',textDecoration:'none',fontWeight:'bold'}}>Order A Delivery</Card.Link>
+        </Row>
         </Card.Body>
       </Card>)
       })}
