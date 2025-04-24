@@ -1,8 +1,14 @@
 import React from 'react'
-import { Button, Container,Row,Col,Card } from 'react-bootstrap'
+import { useState } from 'react'
+import { Button, Container,Row,Col} from 'react-bootstrap'
+import { CSSTransition } from 'react-transition-group';
+import HighlightRow from './HighLightRow'
 import greeksalad from './assets/greeksalad.jpg'
 import bruschetta from './assets/bruschetta.png'
 import lemondessert from './assets/lemondessert.jpg'
+import lasagna from './assets/lasagna.jpg'
+import pasta from './assets/pasta.jpg'
+import couscous from './assets/couscous.jpg'
 
 function Highlight() {
 
@@ -24,8 +30,30 @@ function Highlight() {
       title : 'Lemon Dessert',
       price : '$5.00',
       description : 'This comes straight from grandma’s recipe book, every last ingredient has been sourced and is as authentic as can be imagined.'
+    },
+    {
+      src : lasagna,
+      title : 'Signature Lasagna',
+      price : '$14.99',
+      description : 'Layers of fresh pasta, slow-cooked meat sauce, creamy béchamel, and melted mozzarella, finished with a hint of lemon and fresh herbs. A bold, comforting classic with a bright Mediterranean twist.'
+    },
+    {
+      src : pasta,
+      title : 'Mushroom Penne',
+      price: '$19.99',
+      description: 'Tender penne pasta tossed in a rich, velvety garlic cream sauce with sautéed mushrooms and a hint of Parmesan. Finished with a sprinkle of fresh parsley for a bright, herbaceous touch. Comforting, indulgent, and full of flavor.'
+    },
+    {
+      src: couscous,
+      title : 'Mediterenean Couscous',
+      price : '$9.99',
+      description: 'Fluffy golden couscous tossed with sautéed broccoli, mushrooms, and sweet corn, topped with a fiery chili-garlic glaze. Finished with fresh cilantro and whole red and green chilies for a bold, aromatic kick. A colorful, plant-powered dish with attitude.'
     }
   ]
+
+  const [expanded, setExpanded] = useState(false);
+  const firstRowCards = hightLightCard.slice(0, 3);
+  const secondRowCards = hightLightCard.slice(3);
 
   return (
     <Container className='container-style'>
@@ -47,33 +75,16 @@ function Highlight() {
       </Button>
       </Col>
     </Row>
-    <Row>
-      {hightLightCard.map((item) => {
-        return (
-        <Card style={{ width: '16rem' }}>
-        <Row>
-          <Card.Img
-            variant="top" src={item.src}
-            className="no-padding p-0 m-0 w-100"
-            style={{ height: '150px', objectFit: 'cover' }}
-            cap
-          />
-        </Row>
-        <Card.Body style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <div style={{display:'flex', justifyContent:'space-between'}}>
-          <Card.Title>{item.title}</Card.Title>
-          <Card.Title style={{color:'#EE9972'}}>{item.price}</Card.Title>
-        </div>
-        <Card.Text style={{textAlign:'left'}}>
-          {item.description}
-        </Card.Text>
-        <Row>
-          <Card.Link href="/OnlineMenu" className='text-start' style={{color:'#333333',textDecoration:'none',fontWeight:'bold'}}>Order A Delivery</Card.Link>
-        </Row>
-        </Card.Body>
-      </Card>)
-      })}
-    </Row>
+    <HighlightRow cards={firstRowCards}/>
+    {expanded && <HighlightRow cards={secondRowCards} />}
+    <div className="text-center mt-3">
+      <button
+        className="btn btn-warning fw-bold px-4 py-2"
+        onClick={() => setExpanded(!expanded)}
+      >
+        {expanded ? 'Show Less' : 'Show More'}
+      </button>
+    </div>
     </Container>
   )
 }
