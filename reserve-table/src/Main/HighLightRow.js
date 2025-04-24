@@ -5,7 +5,7 @@ import delivery from './icons/delivery.png'
 function HighlightRow(props) {
 
   return (
-    <Row className='d-flex justify-content-around' style={{margin:"5%"}}>
+    <Row className='d-flex justify-content-around' style={{margin:"1%"}}>
       {/**/}
       {props.cards.map((item) => {
         return (
