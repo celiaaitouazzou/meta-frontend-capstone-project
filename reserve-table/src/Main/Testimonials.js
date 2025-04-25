@@ -4,13 +4,14 @@ import icon1 from './Ticon/icon1.png'
 import icon2 from './Ticon/icon2.png'
 import icon3 from './Ticon/icon3.png'
 import icon4 from './Ticon/icon4.png'
-import icon5 from './Ticon/icon5.png'
-import icon6 from './Ticon/icon6.png'
-import icon7 from './Ticon/icon7.png'
-import icon8 from './Ticon/icon8.png'
+import icon5 from './Ticon/icon5.jpg'
+import icon6 from './Ticon/icon6.jpg'
+import icon7 from './Ticon/icon7.jpg'
+import icon8 from './Ticon/icon8.jpg'
 import halfstar from './icons/halfstar.png'
 import fullstar from './icons/fullstar.png'
 import emptystar from './icons/emptystar.png'
+import RatingStar from './RatingStar'
 
 function Testimonials() {
 
@@ -60,6 +61,9 @@ function Testimonials() {
     <Container>
         <h1>Testimonials</h1>
         <div>
+            {cardContent.map(item => {
+                <RatingStar stars={item.rating}/>
+            })}
         </div>
     </Container>
     )
