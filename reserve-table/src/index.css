@@ -26,3 +26,45 @@
   overflow: hidden;
   transition: max-height 0.5s ease-in-out; /* Ensure transition is also defined for collapsing */
 }
+
+/* RatingStar.css */
+.rating-stars {
+  display: flex;
+  gap: 0.2em; /* Adjust spacing between stars */
+}
+
+.star {
+  font-size: 1.2em; /* Adjust star size */
+  color: gold; /* Adjust star color */
+}
+
+.empty-star {
+  color: lightgray; /* Color for empty stars */
+}
+
+.testimonial-slide {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.review-row-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.review-card {
+  width: 24em;
+}
+
+.review-card-image {
+  max-height: 150px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.rating-spacing {
+  margin-bottom: 0.5rem;
+}
