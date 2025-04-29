@@ -6,10 +6,10 @@ import cardContent from './testimonialContent'
 function Testimonials() {
     return (
     <Container className='t-container-style' style={{width:"100%"}}>
-        <div style={{paddingTop:'10%',paddingBottom:'10%'}}>
+        <div style={{paddingTop:'5%',paddingBottom:'5%'}}>
             <h1 style={{fontFamily:'Markazi-Text',padding:"18px",color:"white",fontWeight:'bold'}}>Testimonials</h1>
             <div className="testimonials-scroll-container">
-                <div className="testimonial-row-wrapper">
+                <div className="testimonial-row-wrapper" >
                     <ReviewRow row={cardContent.slice(0,4)}/>
                     <ReviewRow row={cardContent.slice(4)} />
                 </div>

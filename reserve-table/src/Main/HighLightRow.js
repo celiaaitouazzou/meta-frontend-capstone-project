@@ -5,7 +5,7 @@ import delivery from './icons/delivery.png'
 function HighlightRow(props) {
 
   return (
-    <Row style={{display:'flex',flexDirection:'row',justifyContent:'space-between',margin:"1%"}}>
+    <Row style={{display:'flex',flexDirection:'row',justifyContent:'space-between',margin:'5px'}}>
       {/**/}
       {props.cards.map((item) => {
         return (
