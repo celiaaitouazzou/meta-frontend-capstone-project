@@ -12,7 +12,7 @@ function ReviewRow(props) {
                         <RatingStar stars={item.rating} />
                     </div>
                     <div>
-                        <Card.Img variant="top" src={item.src} style={{ maxHeight: '150px', objectFit: 'contain', marginBottom: '0.5rem' }} />
+                        <Card.Img variant="top" src={item.src} style={{ maxHeight: '150px', objectFit: 'contain', marginBottom: '0.5rem' }}/>
                         <Card.Title>{item.name}</Card.Title>
                     </div>
                     <Card.Text>
