@@ -54,3 +54,56 @@
   gap: 2rem; /* Space between the ReviewRow components */
   padding: 1rem 0; /* Add some vertical padding */
 }
+
+/* ReviewRow.css */
+.t-container-style{
+  padding: 10px;
+  background-color: rgb(73, 94, 87);
+}
+.review-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center; /* Center the cards horizontally in the row */
+  padding: 1rem 0;
+}
+
+.review-card {
+  width: 20em;
+}
+
+.review-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content within the card body */
+  text-align: center; /* Center text within the card body */
+}
+
+.rating-container {
+  font-size: 1.2em; /* Reduced the font-size to a more normal size */
+  margin-bottom: 1rem; /* Add space below the stars */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center image and name */
+  margin-bottom: 0.5rem;
+}
+
+.user-icon {
+  width: 100px; /* Set a fixed width */
+  height: 100px; /* Set a fixed height (same as width for circle) */
+  object-fit: cover; /* Maintain aspect ratio and crop to fill */
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.comment-text {
+  font-size: 0.9rem;
+  color: #555;
+}

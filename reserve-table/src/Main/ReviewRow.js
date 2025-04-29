@@ -3,26 +3,26 @@ import RatingStar from './RatingStar';
 import { Card } from 'react-bootstrap';
 
 function ReviewRow(props) {
-  return (
-    <div style={{display:'flex',flexDirection:'row',justifyContent: 'center'}}>
-        {props.row.map((item, index) => (
-            <Card style={{ width: '24em' ,margin:"2%"}}>
-                <Card.Body>
-                    <div key={index} className="rating-spacing">
-                        <RatingStar stars={item.rating} />
-                    </div>
-                    <div>
-                        <Card.Img variant="top" src={item.src} style={{ maxHeight: '150px', objectFit: 'contain', marginBottom: '0.5rem' }}/>
-                        <Card.Title>{item.name}</Card.Title>
-                    </div>
-                    <Card.Text>
-                    {item.comment}
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-        ))}
-    </div>
-  )
+    return (
+        <div className="review-row">
+            {props.row.map((item, index) => (
+                <Card key={index} className="review-card">
+                    <Card.Body className="review-card-body">
+                        <div className="rating-container">
+                            <RatingStar stars={item.rating} />
+                        </div>
+                        <div className="user-info">
+                            <Card.Img variant="top" src={item.src} className="user-icon" />
+                            <Card.Title className="user-name" style={{padding:"5x"}}>{item.name}</Card.Title>
+                        </div>
+                        <Card.Text className="comment-text" style={{fontSize:"18px"}}>
+                            {item.comment}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            ))}
+        </div>
+    );
 }
 
 export default ReviewRow;

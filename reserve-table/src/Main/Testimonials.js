@@ -13,8 +13,8 @@ function Testimonials() {
     };
 
     return (
-    <Container>
-        <h1>Testimonials</h1>
+    <Container className='t-container-style'>
+        <h1 style={{fontFamily:'Markazi-Text',padding:"20px",color:"white"}}>Testimonials</h1>
         <div className="testimonials-scroll-container">
             <div className="testimonial-row-wrapper">
                 <ReviewRow row={cardContent.slice(0,4)}/>
