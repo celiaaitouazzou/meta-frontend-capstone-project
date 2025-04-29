@@ -13,7 +13,7 @@ function ReviewRow(props) {
                         </div>
                         <div className="user-info">
                             <Card.Img variant="top" src={item.src} className="user-icon" />
-                            <Card.Title className="user-name" style={{padding:"5x"}}>{item.name}</Card.Title>
+                            <Card.Title className="user-name" style={{padding:"5x",fontSize:"18px"}}>{item.name}</Card.Title>
                         </div>
                         <Card.Text className="comment-text" style={{fontSize:"18px"}}>
                             {item.comment}

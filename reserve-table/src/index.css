@@ -42,17 +42,21 @@
   color: lightgray; /* Color for empty stars */
 }
 
+/* Testimonials.css */
 .testimonials-scroll-container {
-  overflow-x: auto; /* Enable horizontal scrolling */
-  -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
-  padding-bottom: 1rem; /* Prevent potential overlap with shadows or other elements */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  min-width: 1200px; /* Set a minimum width for the container */
+  /* Adjust this value as needed to be significantly wider than your cards */
 }
 
 .testimonial-row-wrapper {
-  display: flex; /* Arrange the ReviewRows horizontally */
-  flex-direction: row; /* Ensure items are in a row */
-  gap: 2rem; /* Space between the ReviewRow components */
-  padding: 1rem 0; /* Add some vertical padding */
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem; /* Adjust gap as needed */
+  justify-content: flex-start; /* Keep cards aligned to the start */
+  padding: 1rem 0;
 }
 
 /* ReviewRow.css */
