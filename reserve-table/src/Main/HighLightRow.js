@@ -5,11 +5,11 @@ import delivery from './icons/delivery.png'
 function HighlightRow(props) {
 
   return (
-    <Row className='d-flex justify-content-around' style={{margin:"1%"}}>
+    <Row style={{display:'flex',flexDirection:'row',justifyContent:'space-between',margin:"1%"}}>
       {/**/}
       {props.cards.map((item) => {
         return (
-        <Card style={{ width: '16rem' , backgroundColor:'#EDEFEE',marginTop:"2%"}}>
+        <Card style={{ width: '20rem' , backgroundColor:'#EDEFEE',marginTop:"2%"}}>
         <Row>
           <Card.Img
             variant="top"

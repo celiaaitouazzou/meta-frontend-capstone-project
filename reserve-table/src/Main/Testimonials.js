@@ -1,12 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { Card , Button , Carousel } from 'react-bootstrap'
 import ReviewRow from './ReviewRow'
 import cardContent from './testimonialContent'
 
 function Testimonials() {
-    
+
     const [index, setIndex] = useState(0);
 
     const handleSelect = (selectedIndex) => {
@@ -16,11 +15,11 @@ function Testimonials() {
     return (
     <Container>
         <h1>Testimonials</h1>
-        <div tyle={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-            <ReviewRow row={cardContent.slice(0,4)}/>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-            <ReviewRow row={cardContent.slice(4)} />
+        <div className="testimonials-scroll-container">
+            <div className="testimonial-row-wrapper">
+                <ReviewRow row={cardContent.slice(0,4)}/>
+                <ReviewRow row={cardContent.slice(4)} />
+            </div>
         </div>
     </Container>
     )

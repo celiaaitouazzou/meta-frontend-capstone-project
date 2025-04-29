@@ -6,7 +6,7 @@ function ReviewRow(props) {
   return (
     <div style={{display:'flex',flexDirection:'row',justifyContent: 'center'}}>
         {props.row.map((item, index) => (
-            <Card style={{ width: '24em' }}>
+            <Card style={{ width: '24em' ,margin:"2%"}}>
                 <Card.Body>
                     <div key={index} className="rating-spacing">
                         <RatingStar stars={item.rating} />
