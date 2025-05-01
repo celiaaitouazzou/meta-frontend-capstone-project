@@ -160,3 +160,53 @@
   right: 10px;
   text-align: center;
 }
+
+.bottom-nav-link h2{
+  font-family: 'Markazi Text';
+  font-weight: bold;
+  color: #F4CE14;
+}
+.bottom-nav-link img {
+  width: 16px;
+  display: block;
+  margin: auto;
+  height: auto;
+}
+
+.doormat-nav-link {
+  color:white;
+}
+
+.footer-container-style {
+  background-color: rgb(73, 94, 87);
+  padding: 2%;
+}
+
+.bottom-nav-link ul {
+  padding: 0; /* Remove default padding from the list */
+  margin: 0; /* Remove default margin from the list */
+}
+
+.bottom-nav-link ul li {
+  display: flex; /* Use flexbox to align text and icon */
+  align-items: center; /* Vertically align text and icon */
+  margin-bottom: 0.5rem; /* Add some space between list items */
+}
+
+.bottom-nav-link ul li img {
+  width: 24px; /* Adjust the icon size as needed */
+  height: 24px;
+  margin-left: 0.5rem; /* Add space between text and icon (icon on the right) */
+  /* Or use margin-right: 0.5rem; if you want the icon on the left */
+}
+
+.d-none.d-lg-block.position-absolute.top-0.end-0.pt-5 {
+  transform: translate(0%, 7.5%); /* Adjust the horizontal positioning of the image */
+}
+
+.text-start.flex-start { /* This class might need to be adjusted or removed */
+  padding-left: 2rem; /* Add left padding to the text */
+  display: flex; /* Ensure flexbox is used */
+  flex-direction: column; /* Stack text elements vertically */
+  justify-content: center; /* Center content vertically */
+}
