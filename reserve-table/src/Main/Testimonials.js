@@ -1,6 +1,5 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import ReviewRow from './ReviewRow'
 import cardContent from './testimonialContent'
 import { Card, Row , Col} from 'react-bootstrap';
 import RatingStar from './RatingStar';
