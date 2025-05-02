@@ -29,7 +29,7 @@ function Navigation() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <AppRoutes /> {/* Render the separate component for routes */}
+      <AppRoutes />
     </Router>
   );
 }

@@ -5,7 +5,6 @@ import Main from './Main';
 import Footer from'./Footer.js'
 import React from 'react';
 import AppRoutes from './AppRoutes.js';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
@@ -13,9 +12,6 @@ function App() {
       <Navigation />
       <Main />
       <Footer/>
-      <Router>
-        <AppRoutes />
-      </Router>
     </div>
   );
 }
