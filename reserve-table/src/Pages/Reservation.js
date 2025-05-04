@@ -1,8 +1,9 @@
 import React from 'react'
+import Navigation from '../Navigation'
 
 function Reservation() {
   return (
-    <div>Reservation</div>
+    <div><Navigation /></div>
   )
 }
 

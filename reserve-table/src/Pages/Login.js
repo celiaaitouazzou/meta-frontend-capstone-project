@@ -1,8 +1,9 @@
 import React from 'react'
+import Navigation from '../Navigation'
 
 function Login() {
   return (
-    <div>Login</div>
+    <div><Navigation /></div>
   )
 }
 
