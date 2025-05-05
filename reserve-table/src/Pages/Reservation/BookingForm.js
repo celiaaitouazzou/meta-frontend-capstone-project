@@ -1,29 +1,50 @@
 import React from 'react'
+import { useState } from 'react';
 
 function BookingForm() {
+const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+    });
+
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    // Do something with formData
+    };
   return (
     <div>
-        <form style="display: grid; max-width: 200px; gap: 20px">
-            <label for="res-date">Choose date</label>
-            <input type="date" id="res-date" />
-            <label for="res-time">Choose time</label>
-            <select id="res-time ">
-                <option>17:00</option>
-                <option>18:00</option>
-                <option>19:00</option>
-                <option>20:00</option>
-                <option>21:00</option>
-                <option>22:00</option>
-            </select>
-            <label for="guests">Number of guests</label>
-            <input type="number" placeholder="1" min="1" max="10" id="guests" />
-            <label for="occasion">Occasion</label>
-            <select id="occasion">
-                <option>Birthday</option>
-                <option>Anniversary</option>
-            </select>
-            <input type="submit" value="Make Your reservation" />
-            </form>
+
+    <h1>Any place in your app!</h1>
+    <div>
+      <h1>Reservation Form</h1>
+      
+    <form onSubmit={handleSubmit}>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="Email"
+      />
+
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+        placeholder="Password"
+      />
+
+      <button type="submit">Submit</button>
+    </form>
+    </div>
+
     </div>
   )
 }
