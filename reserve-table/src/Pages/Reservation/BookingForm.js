@@ -3,15 +3,8 @@ import Form from 'react-bootstrap/Form';
 import { Button, Row, Col, Container } from 'react-bootstrap';
 import greekSalad from './GreekSalad.jpg';
 
-function BookingForm() {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    date: '',
-    time: '',
-    guests: 2,
-    occasion: '',
-  });
+function BookingForm(props) {
+  const [formData, setFormData] = useState(props.formData);
 
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
@@ -40,7 +33,6 @@ function BookingForm() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
