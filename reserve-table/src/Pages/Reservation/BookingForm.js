@@ -63,7 +63,7 @@ function BookingForm() {
                 value={formData.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.firstName && !!errors.firstName}
+                isInvalid={touched.firstName || !!errors.firstName}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.firstName}
@@ -79,7 +79,7 @@ function BookingForm() {
                 value={formData.lastName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.lastName && !!errors.lastName}
+                isInvalid={touched.lastName || !!errors.lastName}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.lastName}
@@ -94,7 +94,7 @@ function BookingForm() {
                 value={formData.date}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.date && !!errors.date}
+                isInvalid={touched.date || !!errors.date}
               />
               <Form.Control.Feedback type="invalid">
                 {errors.date}
@@ -109,7 +109,7 @@ function BookingForm() {
                 value={formData.time}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.time && !!errors.time}
+                isInvalid={touched.time || !!errors.time}
               />
               <Form.Text muted>We are open from 8:00 AM to 10 PM.</Form.Text>
               <Form.Control.Feedback type="invalid">
