@@ -110,7 +110,7 @@ function BookingForm(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="noGuest">
-              <Form.Label>Number of Guests: {formData.guests}</Form.Label>
+              <Form.Label aria-live="polite">Selected Number of Guests: {formData.guests}</Form.Label>
               <Form.Control
                 type="range"
                 min={1}
@@ -134,7 +134,7 @@ function BookingForm(props) {
                 value={formData.occasion}
                 onChange={handleChange}
               >
-                <option value="">Occasion</option>
+                <option value="Occasion">Select an Occasion</option>
                 <option value="Birthday">Birthday</option>
                 <option value="Engagement">Engagement</option>
                 <option value="Anniversary">Anniversary</option>
