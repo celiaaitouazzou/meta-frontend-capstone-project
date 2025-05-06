@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import {Button, Row, Col , Container} from 'react-bootstrap';
-import { useState } from 'react';
-import greekSalad from './GreekSalad.jpg'
+import { Button, Row, Col, Container } from 'react-bootstrap';
+import greekSalad from './GreekSalad.jpg';
 
 function BookingForm() {
   const [formData, setFormData] = useState({
@@ -24,6 +23,7 @@ function BookingForm() {
       [name]: value,
     }));
   };
+
   const handleBlur = (e) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
@@ -63,10 +63,10 @@ function BookingForm() {
                 value={formData.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.firstName && !errors.firstName}
+                isInvalid={touched.firstName && !!errors.firstName}
               />
               <Form.Control.Feedback type="invalid">
-                {touched.firstName && errors.firstName}
+                {errors.firstName}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -78,9 +78,12 @@ function BookingForm() {
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
-                isInvalid={!!errors.lastName}
+                onBlur={handleBlur}
+                isInvalid={touched.lastName && !!errors.lastName}
               />
-              <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.lastName}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="dateInput">
@@ -90,9 +93,12 @@ function BookingForm() {
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
-                isInvalid={!!errors.date}
+                onBlur={handleBlur}
+                isInvalid={touched.date && !!errors.date}
               />
-              <Form.Control.Feedback type="invalid">{errors.date}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.date}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="timeInput">
@@ -102,10 +108,13 @@ function BookingForm() {
                 name="time"
                 value={formData.time}
                 onChange={handleChange}
-                isInvalid={!!errors.time}
+                onBlur={handleBlur}
+                isInvalid={touched.time && !!errors.time}
               />
               <Form.Text muted>We are open from 8:00 AM to 10 PM.</Form.Text>
-              <Form.Control.Feedback type="invalid">{errors.time}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.time}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="noGuest">
@@ -118,10 +127,13 @@ function BookingForm() {
                 name="guests"
                 value={formData.guests}
                 onChange={handleChange}
-                isInvalid={!!errors.guests}
+                onBlur={handleBlur}
+                isInvalid={touched.guests && !!errors.guests}
               />
               <Form.Text muted>We can accommodate up to 12 people parties.</Form.Text>
-              <Form.Control.Feedback type="invalid">{errors.guests}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                {errors.guests}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -150,4 +162,4 @@ function BookingForm() {
   );
 }
 
-export default BookingForm
+export default BookingForm;
