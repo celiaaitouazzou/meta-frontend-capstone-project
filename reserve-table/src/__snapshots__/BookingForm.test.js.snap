@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookingForm renders without crashing and matches basic structure 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+      style="background-color: rgb(244, 206, 20); padding: 5%;"
+    >
+      <div
+        class="col"
+        style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: baseline;"
+      >
+        <form
+          class=""
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="formBasicFN"
+            >
+              First Name
+            </label>
+            <input
+              class="form-control"
+              id="formBasicFN"
+              name="firstName"
+              placeholder="First Name"
+              type="text"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="formBasicLN"
+            >
+              Last Name
+            </label>
+            <input
+              class="form-control"
+              id="formBasicLN"
+              name="lastName"
+              placeholder="Last Name"
+              type="text"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="dateInput"
+            >
+              Date
+            </label>
+            <input
+              class="form-control"
+              id="dateInput"
+              name="date"
+              type="date"
+              value=""
+            />
+            <div
+              class="invalid-feedback"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="timeInput"
+            >
+              Time
+            </label>
+            <input
+              class="form-control"
+              id="timeInput"
+              name="time"
+              type="time"
+              value=""
+            />
+            <small
+              class="form-text text-muted"
+            >
+              We are open from 8:00 AM to 10 PM.
+            </small>
+            <div
+              class="invalid-feedback"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              aria-live="polite"
+              class="form-label"
+              for="noGuest"
+            >
+              Selected Number of Guests: 
+              1
+            </label>
+            <input
+              class="form-control"
+              id="noGuest"
+              max="12"
+              min="1"
+              name="guests"
+              step="1"
+              type="range"
+              value="1"
+            />
+            <small
+              class="form-text text-muted"
+            >
+              We can accommodate up to 12 people parties.
+            </small>
+            <div
+              class="invalid-feedback"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <select
+              class="form-select"
+              name="occasion"
+            >
+              <option
+                value="Occasion"
+              >
+                Select an Occasion
+              </option>
+              <option
+                value="Birthday"
+              >
+                Birthday
+              </option>
+              <option
+                value="Engagement"
+              >
+                Engagement
+              </option>
+              <option
+                value="Anniversary"
+              >
+                Anniversary
+              </option>
+            </select>
+          </div>
+          <button
+            class="btn btn-dark"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div
+        class="col"
+      >
+        <img
+          alt="greek-salad"
+          height="600"
+          src="GreekSalad.jpg"
+          width="800"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
