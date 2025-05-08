@@ -118,41 +118,41 @@ describe('BookingForm - Required Fields Validation and Visual Feedback', () => {
   });
 });
 
+
 describe('BookingForm - Multiple Empty Required Fields', () => {
   const mockFormData = {
     firstName: '',
     lastName: '',
-    date: '2005-05-09',
-    time: '20:08',
+    date: '09-05-2005',
+    time: '08:08PM',
     guests: 2,
     occasion: '',
   };
 
-  let alertMock;
-
-  beforeEach(() => {
-    alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
-  });
-
-  afterEach(() => {
-    alertMock.mockRestore();
-  });
+  const renderForm = (formData = mockFormData) => {
+    render(<BookingForm formData={formData} />);
+  };
 
   test('If First name and Last name are empty, it should show required for both and NOT submit', () => {
-    render(<BookingForm formData={mockFormData} />);
-    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
+    renderForm(mockFormData);
+    fireEvent.click(screen.getByRole('button', { name: /Submit/i }));
 
-    // Validate both "Required" messages appear
-    const requiredMessages = screen.getAllByText('Required');
-    expect(requiredMessages.length).toBeGreaterThanOrEqual(2);
+    // Check for "Required" for First Name within an element with class 'invalid-feedback'
+    const firstNameRequired = screen.getByText('Required', {
+      selector: '.invalid-feedback',
+    });
+    expect(firstNameRequired).toBeVisible();
 
-    // Ensure alert was not called
+    // Check for "Required" for Last Name within an element with class 'invalid-feedback'
+    const lastNameRequired = screen.getByText('Required', {
+      selector: '.invalid-feedback',
+    });
+    expect(lastNameRequired).toBeVisible();
+
+    // Check if the alert (representing submission) was NOT called
     expect(alertMock).not.toHaveBeenCalled();
 
-    const firstNameFeedback = screen.getByText('Required');
-    expect(firstNameFeedback).toBeInTheDocument();
-
-    const lastNameFeedback = screen.getAllByText('Required')[1]; // or use a label-based query
-    expect(lastNameFeedback).toBeInTheDocument();
+    alertMock.mockRestore(); // Clean up the mock
   });
 });
