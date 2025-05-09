@@ -24,14 +24,12 @@ function BookingForm(props) {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.firstName.trim()) newErrors.firstName = 'Required';
-    if (!formData.lastName.trim()) newErrors.lastName = 'Required';
+    if (!formData.firstName) newErrors.firstName = 'Required';
+    if (!formData.lastName) newErrors.lastName = 'Required';
     if (!formData.date) newErrors.date = 'Required';
     if (!formData.time) newErrors.time = 'Required';
-    if (!formData.guests) newErrors.guests = 'Required';
     return newErrors;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault(); // ✅ Prevent form reload
     const validationErrors = validate();
