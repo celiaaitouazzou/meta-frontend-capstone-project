@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot testing renders the form correctly 1`] = `
+<div>
+  <div
+    class="container"
+  >
+    <div
+      class="row"
+      style="background-color: rgb(244, 206, 20); padding: 5%;"
+    >
+      <div
+        class="col"
+        style="display: flex; flex-direction: row; justify-content: space-evenly; align-items: baseline;"
+      >
+        <form
+          action="#"
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="firstName"
+            >
+              First Name
+            </label>
+            <input
+              class="form-control "
+              id="firstName"
+              name="firstName"
+              placeholder="First Name"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="lastName"
+            >
+              Last Name
+            </label>
+            <input
+              class="form-control "
+              id="lastName"
+              name="lastName"
+              placeholder="Last Name"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="date"
+            >
+              Date
+            </label>
+            <input
+              class="form-control "
+              id="date"
+              name="date"
+              type="date"
+              value=""
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="time"
+            >
+              Time
+            </label>
+            <input
+              class="form-control "
+              id="time"
+              name="time"
+              type="time"
+              value=""
+            />
+            <div
+              class="form-text"
+            >
+              We are open from 8:00 AM to 10 PM.
+            </div>
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="guests"
+            >
+              Selected Number of Guests: 
+              1
+            </label>
+            <input
+              class="form-range "
+              id="guests"
+              max="12"
+              min="1"
+              name="guests"
+              step="1"
+              type="range"
+              value="1"
+            />
+            <div
+              class="form-text"
+            >
+              We can accommodate up to 12 people parties.
+            </div>
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="occasion"
+            >
+              Select an Occasion
+            </label>
+            <select
+              class="form-select"
+              id="occasion"
+              name="occasion"
+            >
+              <option
+                value="Occasion"
+              >
+                Select an Occasion
+              </option>
+              <option
+                value="Birthday"
+              >
+                Birthday
+              </option>
+              <option
+                value="Engagement"
+              >
+                Engagement
+              </option>
+              <option
+                value="Anniversary"
+              >
+                Anniversary
+              </option>
+            </select>
+          </div>
+          <button
+            class="btn btn-dark"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div
+        class="col"
+      >
+        <img
+          alt="greek-salad"
+          height="600"
+          src="GreekSalad.jpg"
+          width="800"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

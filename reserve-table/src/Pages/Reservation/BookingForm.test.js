@@ -445,28 +445,621 @@ describe("Multiple fields are empty and show 'required' error messages after sub
 
 describe("Touched fields show 'required' error messages before submission", () => {
   test("first name is touched and shows 'required' before submission", async () => {
-  const formDataEmpty = {
-    firstName: '',
-    lastName: 'Ait',
-    date: '03-03-2003',
-    time: '09:09PM',
-    guests: '1',
-    occasion: 'Occasion',
-  };
+    const formDataEmpty = {
+      firstName: '',
+      lastName: 'Ait',
+      date: '03-03-2003',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
 
-  // Render the form
-  render(<BookingForm formData={formDataEmpty} />);
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
 
-  // Simulate touching the field
-  const firstNameInput = screen.getByLabelText(/First Name/i);
-  fireEvent.blur(firstNameInput); // Simulates the field losing focus
+    // Simulate touching the field
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    fireEvent.blur(firstNameInput); // Simulates the field losing focus
 
-  // Check touched state and error message immediately
-  await waitFor(() => {
-    const firstNameDiv = firstNameInput.closest('.mb-3');
-    expect(firstNameDiv).toHaveTextContent(/Required/i);
-    expect(firstNameInput).toHaveClass('is-invalid');
+    // Check touched state and error message immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("last name is touched and shows 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: '',
+      date: '03-03-2003',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the field
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    fireEvent.blur(lastNameInput); // Simulates the field losing focus
+
+    // Check touched state and error message immediately
+    await waitFor(() => {
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("date is touched and shows 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: 'Ait',
+      date: '',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the field
+    const dateInput = screen.getByLabelText(/Date/i);
+    fireEvent.blur(dateInput); // Simulates the field losing focus
+
+    // Check touched state and error message immediately
+    await waitFor(() => {
+      const dateDiv = dateInput.closest('.mb-3');
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(dateInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("time is touched and shows 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: 'Ait',
+      date: '03-03-2003',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the field
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(timeInput); // Simulates the field losing focus
+
+    // Check touched state and error message immediately
+    await waitFor(() => {
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(timeInput).toHaveClass('is-invalid');
+    });
   });
 });
 
+describe("Pairs of touched fields show 'required' error messages before submission", () => {
+  test("first name and last name are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: '',
+      date: '03-03-2003',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    fireEvent.blur(firstNameInput); // Simulates the field losing focus
+    fireEvent.blur(lastNameInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(lastNameInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("first name and date are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: 'Ait',
+      date: '',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    fireEvent.blur(firstNameInput); // Simulates the field losing focus
+    fireEvent.blur(dateInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("first name and time are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: 'Ait',
+      date: '03-03-2003',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(firstNameInput); // Simulates the field losing focus
+    fireEvent.blur(timeInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("last name and date are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: '',
+      date: '',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    fireEvent.blur(lastNameInput); // Simulates the field losing focus
+    fireEvent.blur(dateInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("last name and time are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: '',
+      date: '03-03-2003',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(lastNameInput); // Simulates the field losing focus
+    fireEvent.blur(timeInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("date and time are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: 'Ait',
+      date: '',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const dateInput = screen.getByLabelText(/Date/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(dateInput); // Simulates the field losing focus
+    fireEvent.blur(timeInput); // Simulates the field losing focus
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const dateDiv = dateInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(dateInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+});
+
+
+describe("Groups of touched fields show 'required' error messages before submission", () => {
+  test("first name, last name, and date are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: '',
+      date: '',
+      time: '09:09PM',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    fireEvent.blur(firstNameInput);
+    fireEvent.blur(lastNameInput);
+    fireEvent.blur(dateInput);
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("first name, last name, and time are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: '',
+      date: '03-03-2003',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(firstNameInput);
+    fireEvent.blur(lastNameInput);
+    fireEvent.blur(timeInput);
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("last name, date, and time are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: 'John',
+      lastName: '',
+      date: '',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(lastNameInput);
+    fireEvent.blur(dateInput);
+    fireEvent.blur(timeInput);
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+
+  test("all four fields are touched and show 'required' before submission", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: '',
+      date: '',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+    fireEvent.blur(firstNameInput);
+    fireEvent.blur(lastNameInput);
+    fireEvent.blur(dateInput);
+    fireEvent.blur(timeInput);
+
+    // Check touched state and error messages immediately
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+});
+
+describe("Form does not submit when all mandatory fields are empty", () => {
+  test("all 4 mandatory fields are empty and form does not submit", async () => {
+    const formDataEmpty = {
+      firstName: '',
+      lastName: '',
+      date: '',
+      time: '',
+      guests: '1',
+      occasion: 'Occasion',
+    };
+
+    // Mock the onSubmit handler
+    const handleSubmit = jest.fn();
+
+    // Render the form
+    render(<BookingForm formData={formDataEmpty} onSubmit={handleSubmit} />);
+
+    // Simulate touching the fields
+    const firstNameInput = screen.getByLabelText(/First Name/i);
+    const lastNameInput = screen.getByLabelText(/Last Name/i);
+    const dateInput = screen.getByLabelText(/Date/i);
+    const timeInput = screen.getByLabelText(/Time/i);
+
+    fireEvent.blur(firstNameInput);
+    fireEvent.blur(lastNameInput);
+    fireEvent.blur(dateInput);
+    fireEvent.blur(timeInput);
+
+    // Simulate clicking the submit button
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(submitButton);
+
+    // Check that the form does not submit
+    expect(handleSubmit).not.toHaveBeenCalled();
+
+    // Check that all fields display the 'Required' error message
+    await waitFor(() => {
+      const firstNameDiv = firstNameInput.closest('.mb-3');
+      const lastNameDiv = lastNameInput.closest('.mb-3');
+      const dateDiv = dateInput.closest('.mb-3');
+      const timeDiv = timeInput.closest('.mb-3');
+
+      expect(firstNameDiv).toHaveTextContent(/Required/i);
+      expect(lastNameDiv).toHaveTextContent(/Required/i);
+      expect(dateDiv).toHaveTextContent(/Required/i);
+      expect(timeDiv).toHaveTextContent(/Required/i);
+
+      expect(firstNameInput).toHaveClass('is-invalid');
+      expect(lastNameInput).toHaveClass('is-invalid');
+      expect(dateInput).toHaveClass('is-invalid');
+      expect(timeInput).toHaveClass('is-invalid');
+    });
+  });
+});
+
+describe("Form submits successfully when all mandatory fields are properly filled", () => {
+  test("all mandatory fields are filled and form submits successfully", async () => {
+    const formDataFilled = {
+      firstName: 'John',
+      lastName: 'Doe',
+      date: '2025-05-11',
+      time: '07:00PM',
+      guests: '4',
+      occasion: 'Birthday',
+    };
+
+    // Mock the alert function
+    window.alert = jest.fn();
+
+    // Render the form
+    render(<BookingForm formData={formDataFilled}/>);
+
+    // Simulate filling the fields
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formDataFilled.firstName } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formDataFilled.lastName } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formDataFilled.date } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
+    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
+    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
+
+    // Simulate clicking the submit button
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(submitButton);
+
+    // Wait for the mock alert function to be called
+    await waitFor(() => {
+      expect(window.alert).toHaveBeenCalledWith(JSON.stringify(formDataFilled, null, 2));
+    });
+  });
+});
+
+describe("Form submission with an empty 'occasion' field", () => {
+  test("form submits successfully when 'occasion' is empty", async () => {
+    const formData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      date: '2025-05-11',
+      time: '07:00PM',
+      guests: '2', // Default value
+      occasion: '', // Leaving optional field empty
+    };
+
+    const handleSubmit = jest.fn();
+    render(<BookingForm onSubmit={handleSubmit} />);
+
+    // Fill mandatory fields
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formData.firstName } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formData.lastName } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formData.date } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formData.time } });
+
+    // Submit the form
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(handleSubmit).toHaveBeenCalled();
+    });
+  });
+
+  test("form does not submit if mandatory fields are empty but 'occasion' is filled", async () => {
+    const formData = {
+      firstName: '',
+      lastName: '',
+      date: '',
+      time: '',
+      guests: '2', // Default value
+      occasion: 'Birthday',
+    };
+
+    const handleSubmit = jest.fn();
+    render(<BookingForm onSubmit={handleSubmit} />);
+
+    // Fill only the optional field
+    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formData.occasion } });
+
+    // Attempt to submit the form
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(submitButton);
+
+    // Ensure form does not submit
+    expect(handleSubmit).not.toHaveBeenCalled();
+
+    // Verify error messages appear for mandatory fields
+    await waitFor(() => {
+      const firstNameInput = screen.getByLabelText(/First Name/i);
+      const lastNameInput = screen.getByLabelText(/Last Name/i);
+      const dateInput = screen.getByLabelText(/Date/i);
+      const timeInput = screen.getByLabelText(/Time/i);
+
+      expect(firstNameInput.closest('.mb-3')).toHaveTextContent(/Required/i);
+      expect(lastNameInput.closest('.mb-3')).toHaveTextContent(/Required/i);
+      expect(dateInput.closest('.mb-3')).toHaveTextContent(/Required/i);
+      expect(timeInput.closest('.mb-3')).toHaveTextContent(/Required/i);
+    });
+  });
+});
+
+describe("Validation and behavior with an empty 'occasion' field", () => {
+  test("'occasion' field can remain empty without triggering validation error", async () => {
+    const formData = {
+      firstName: 'John',
+      lastName: 'Doe',
+      date: '2025-05-11',
+      time: '07:00PM',
+      guests: '2', // Default value
+      occasion: '', // Leaving optional field empty
+    };
+
+    render(<BookingForm formData={formData}/>);
+
+    // Fill mandatory fields
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formData.firstName } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formData.lastName } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formData.date } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formData.time } });
+
+    // Submit the form
+    const submitButton = screen.getByRole('button', { name: /submit/i });
+    fireEvent.click(submitButton);
+
+    // Ensure no validation error is shown for 'occasion'
+    await waitFor(() => {
+      const occasionInput = screen.getByLabelText(/Occasion/i);
+      expect(occasionInput.closest('.mb-3')).not.toHaveTextContent(/Required/i);
+    });
+  });
 });

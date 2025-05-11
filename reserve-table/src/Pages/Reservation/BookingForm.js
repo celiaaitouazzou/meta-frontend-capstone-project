@@ -14,8 +14,8 @@ function BookingForm(props) {
               lastName: '',
               date: '',
               time: '',
-              guests: '1',
-              occasion: 'Occasion',
+              guests: '2',
+              occasion: 'occasion',
             }}
             validate={values => {
               const errors = {};
@@ -38,6 +38,10 @@ function BookingForm(props) {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
+                const updatedValues = {
+                  ...values,
+                  occasion: values.occasion === '' || values.occasion === 'occasion' ? 'occasion' : values.occasion,
+                };
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
               }, 400);
@@ -143,9 +147,7 @@ function BookingForm(props) {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="occasion" className="form-label">
-                    Select an Occasion
-                  </label>
+                  <label htmlFor="occasion" className="form-label">Select an Occasion</label>
                   <select
                     className="form-select"
                     id="occasion"
@@ -154,7 +156,7 @@ function BookingForm(props) {
                     onBlur={handleBlur}
                     value={values.occasion}
                   >
-                    <option value="Occasion">Select an Occasion</option>
+                    <option value="">Select an Occasion</option>
                     <option value="Birthday">Birthday</option>
                     <option value="Engagement">Engagement</option>
                     <option value="Anniversary">Anniversary</option>
