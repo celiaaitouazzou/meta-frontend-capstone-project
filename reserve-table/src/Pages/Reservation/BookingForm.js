@@ -37,15 +37,12 @@ function BookingForm(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                const updatedValues = {
-                  ...values,
-                  occasion: values.occasion === '' || values.occasion === 'occasion' ? 'occasion' : values.occasion,
-                };
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
-              }, 400);
-            }}
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 400);
+          }}
+
           >
             {({ isSubmitting, values, touched, errors, handleChange, handleBlur }) => (
               <Form>
@@ -156,11 +153,12 @@ function BookingForm(props) {
                     onBlur={handleBlur}
                     value={values.occasion}
                   >
-                    <option value="">Select an Occasion</option>
+                    <option value="occasion">Select an Occasion</option>
                     <option value="Birthday">Birthday</option>
                     <option value="Engagement">Engagement</option>
                     <option value="Anniversary">Anniversary</option>
                   </select>
+                  <div className="form-text">Default is "occasion" if none selected.</div>
                 </div>
 
                 <Button variant="dark" type="submit" disabled={isSubmitting}>

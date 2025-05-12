@@ -15,7 +15,7 @@ function BookingPage() {
 
   return (
     <div>
-      <BookingForm formData={formData} setFormData={setFormData} />
+      <BookingForm formData={formData} />
     </div>
   );
 }

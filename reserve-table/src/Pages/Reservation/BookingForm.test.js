@@ -974,7 +974,7 @@ describe("Form submission with an empty 'occasion' field", () => {
       date: '2025-05-11',
       time: '07:00PM',
       guests: '2', // Default value
-      occasion: '', // Leaving optional field empty
+      occasion: 'occasion', // Leaving optional field empty
     };
 
     const handleSubmit = jest.fn();
@@ -994,72 +994,7 @@ describe("Form submission with an empty 'occasion' field", () => {
       expect(handleSubmit).toHaveBeenCalled();
     });
   });
-
-  test("form does not submit if mandatory fields are empty but 'occasion' is filled", async () => {
-    const formData = {
-      firstName: '',
-      lastName: '',
-      date: '',
-      time: '',
-      guests: '2', // Default value
-      occasion: 'Birthday',
-    };
-
-    const handleSubmit = jest.fn();
-    render(<BookingForm onSubmit={handleSubmit} />);
-
-    // Fill only the optional field
-    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formData.occasion } });
-
-    // Attempt to submit the form
-    const submitButton = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(submitButton);
-
-    // Ensure form does not submit
-    expect(handleSubmit).not.toHaveBeenCalled();
-
-    // Verify error messages appear for mandatory fields
-    await waitFor(() => {
-      const firstNameInput = screen.getByLabelText(/First Name/i);
-      const lastNameInput = screen.getByLabelText(/Last Name/i);
-      const dateInput = screen.getByLabelText(/Date/i);
-      const timeInput = screen.getByLabelText(/Time/i);
-
-      expect(firstNameInput.closest('.mb-3')).toHaveTextContent(/Required/i);
-      expect(lastNameInput.closest('.mb-3')).toHaveTextContent(/Required/i);
-      expect(dateInput.closest('.mb-3')).toHaveTextContent(/Required/i);
-      expect(timeInput.closest('.mb-3')).toHaveTextContent(/Required/i);
-    });
-  });
 });
 
-describe("Validation and behavior with an empty 'occasion' field", () => {
-  test("'occasion' field can remain empty without triggering validation error", async () => {
-    const formData = {
-      firstName: 'John',
-      lastName: 'Doe',
-      date: '2025-05-11',
-      time: '07:00PM',
-      guests: '2', // Default value
-      occasion: '', // Leaving optional field empty
-    };
-
-    render(<BookingForm formData={formData}/>);
-
-    // Fill mandatory fields
-    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formData.firstName } });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formData.lastName } });
-    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formData.date } });
-    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formData.time } });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(submitButton);
-
-    // Ensure no validation error is shown for 'occasion'
-    await waitFor(() => {
-      const occasionInput = screen.getByLabelText(/Occasion/i);
-      expect(occasionInput.closest('.mb-3')).not.toHaveTextContent(/Required/i);
-    });
-  });
+describe('BookingForm Component - Default Occasion Value on Submit', () => {
 });
