@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 
 function BookingPage() {
-  const [formData, setFormData] = useState({
+  const formData = {
     firstName: '',
     lastName: '',
     date: '',
     time: '',
     guests: 2,
     occasion: '',
-  });
+  };
 
   return (
     <div>

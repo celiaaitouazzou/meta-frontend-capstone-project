@@ -1,7 +1,8 @@
 import React from 'react'
 import Navigation from '../Navigation'
-import BookingPage from './Reservation/BookingPage'
+import BookingForm from './Reservation/BookingForm'
 import Footer from '../Footer'
+import BookingPage from './Reservation/BookingPage.js'
 
 
 function Reservation() {

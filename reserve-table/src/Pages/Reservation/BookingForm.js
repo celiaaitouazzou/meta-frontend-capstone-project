@@ -9,13 +9,13 @@ function BookingForm(props) {
       <Row style={{ backgroundColor: '#F4CE14', padding: '5%' }}>
         <Col style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
           <Formik
-            initialValues={props.formData || {
-              firstName: '',
-              lastName: '',
-              date: '',
-              time: '',
-              guests: '2',
-              occasion: 'occasion',
+            initialValues={{
+              firstName: props.formData?.firstName || '',
+              lastName: props.formData?.lastName || '',
+              date: props.formData?.date || '',
+              time: props.formData?.time || '',
+              guests: props.formData?.guests || '2',
+              occasion: props.formData?.occasion || 'occasion',
             }}
             validate={values => {
               const errors = {};
@@ -37,12 +37,11 @@ function BookingForm(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
-          }}
-
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+              }, 400);
+            }}
           >
             {({ isSubmitting, values, touched, errors, handleChange, handleBlur }) => (
               <Form>
@@ -144,7 +143,9 @@ function BookingForm(props) {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="occasion" className="form-label">Select an Occasion</label>
+                  <label htmlFor="occasion" className="form-label">
+                    Select an Occasion
+                  </label>
                   <select
                     className="form-select"
                     id="occasion"
@@ -153,12 +154,11 @@ function BookingForm(props) {
                     onBlur={handleBlur}
                     value={values.occasion}
                   >
-                    <option value="occasion">Select an Occasion</option>
+                    <option value="Occasion">Select an Occasion</option>
                     <option value="Birthday">Birthday</option>
                     <option value="Engagement">Engagement</option>
                     <option value="Anniversary">Anniversary</option>
                   </select>
-                  <div className="form-text">Default is "occasion" if none selected.</div>
                 </div>
 
                 <Button variant="dark" type="submit" disabled={isSubmitting}>
