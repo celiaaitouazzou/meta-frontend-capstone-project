@@ -40,6 +40,13 @@ function BookingForm(props) {
               setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
+                return (
+                <div>
+                  <Container style={{width:"300px",height:"4000"}}>
+                    {values}
+                  </Container>
+                </div>
+              )
               }, 400);
             }}
           >

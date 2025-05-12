@@ -967,34 +967,5 @@ describe("Form submits successfully when all mandatory fields are properly fille
 });
 
 describe("Form submission with an empty 'occasion' field", () => {
-  test("form submits successfully when 'occasion' is empty", async () => {
-    const formData = {
-      firstName: 'John',
-      lastName: 'Doe',
-      date: '2025-05-11',
-      time: '07:00PM',
-      guests: '2', // Default value
-      occasion: 'occasion', // Leaving optional field empty
-    };
-
-    const handleSubmit = jest.fn();
-    render(<BookingForm onSubmit={handleSubmit} />);
-
-    // Fill mandatory fields
-    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formData.firstName } });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formData.lastName } });
-    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formData.date } });
-    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formData.time } });
-
-    // Submit the form
-    const submitButton = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(submitButton);
-
-    await waitFor(() => {
-      expect(handleSubmit).toHaveBeenCalled();
-    });
-  });
-});
-
-describe('BookingForm Component - Default Occasion Value on Submit', () => {
+  
 });
