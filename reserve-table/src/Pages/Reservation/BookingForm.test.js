@@ -966,6 +966,43 @@ describe("Form submits successfully when all mandatory fields are properly fille
   });
 });
 
-describe("Form submission with an empty 'occasion' field", () => {
-  
-});
+describe("Form submits successfully and it submits the default value for occasion and guests", () =>{
+  test("submits with default 'occasion' value when no option is selected", async () => {
+  // Mock the alert function to intercept form submission
+  window.alert = jest.fn();
+
+  // Render the BookingForm component
+  render(<BookingForm />);
+
+  // Fill all mandatory fields except for 'occasion'
+  fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: 'John' } });
+  fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: 'Doe' } });
+  fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: '2025-05-15' } });
+  fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: '18:00' } });
+  fireEvent.change(screen.getByLabelText(/Selected Number of Guests/i));
+
+  // Do not touch the 'occasion' field (it should retain its default value)
+
+  // Submit the form
+  fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+
+  // Wait for the form to be submitted
+  await waitFor(() => {
+    // Assert that the alert function was called with the correct submitted values
+    expect(window.alert).toHaveBeenCalledWith(
+      JSON.stringify(
+        {
+          firstName: 'John',
+          lastName: 'Doe',
+          date: '2025-05-15',
+          time: '18:00',
+          guests: '2',
+          occasion: 'occasion', // Default value
+        },
+        null,
+        2
+      )
+    );
+    });
+  });
+})

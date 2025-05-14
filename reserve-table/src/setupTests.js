@@ -4,4 +4,8 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
-// Mock react-router-dom
+// Mock react-router-dom globally
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'), // Keep all actual functionalities
+  Link: ({ children, to }) => <a href={to}>{children}</a>, // Mock Link as an anchor tag
+}));
