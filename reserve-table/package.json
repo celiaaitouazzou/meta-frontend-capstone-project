@@ -42,5 +42,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "jest": {
+  "moduleNameMapper": {
+    "^react-router-dom$": "./node_modules/react-router-dom"
+  },
+  "setupFilesAfterEnv": ["./src/setupTests.js"]
+}
 }
