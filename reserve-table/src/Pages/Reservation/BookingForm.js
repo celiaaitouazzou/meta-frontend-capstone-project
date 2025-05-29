@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
 import greekSalad from './GreekSalad.jpg';
 
 function BookingForm(props) {
+
   return (
     <Container>
       <Row style={{ backgroundColor: '#F4CE14', padding: '5%' }}>
