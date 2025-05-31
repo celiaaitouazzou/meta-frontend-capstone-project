@@ -9,39 +9,34 @@ import ReactTimePicker from 'react-time-picker';
 function BookingForm(props) {
 
 
-  // Helper to get today's date in yyyy-mm-dd format
+  /// Helper to get today's date in YYYY-MM-DD format
   const getTodayString = () => {
     const today = new Date();
-    return today.toISOString().split('T')[0];
+    // Adjust for timezone offset to ensure the date is correct regardless of local time
+    const userTimezoneOffset = today.getTimezoneOffset() * 60000;
+    const todayLocal = new Date(today.getTime() - userTimezoneOffset);
+    return todayLocal.toISOString().split('T')[0];
   };
 
-  // Set initial date (today or from props)
-  const initialDate = props.formData?.date || getTodayString();
+  const initialDateString = props.formData?.date || getTodayString();
+  const initialDateObject = new Date(initialDateString + 'T00:00:00');
 
-  const [availableTimes, setAvailableTimes] = useState(
-    fetchAPI(new Date(initialDate))
-  );
+  const [availableTimes, setAvailableTimes] = useState(() => fetchAPI(initialDateObject));
 
-  const disabledTimes = (() => {
-    // Build all possible times between min and max in 30 min intervals
-    // For simplicity, we assume availableTimes from fetchAPI are in "H:00"/"H:30" format and convert to "HH:mm"
-    const allTimes = [];
-    for (let h = 0; h < 24; h++) {
-      allTimes.push((h < 10 ? "0" : "") + h + ":00");
-      allTimes.push((h < 10 ? "0" : "") + h + ":30");
+  // Function to generate all possible time slots from 8 AM to 10 PM in 30-minute intervals
+  const generateTimeSlots = () => {
+    const slots = [];
+    for (let hour = 8; hour <= 22; hour++) { // 8 AM to 10 PM (22:00)
+      for (let minute = 0; minute < 60; minute += 30) {
+        const h = hour < 10 ? `0${hour}` : `${hour}`;
+        const m = minute === 0 ? '00' : '30';
+        slots.push(`${h}:${m}`);
+      }
     }
-    // Convert availableTimes to "HH:mm" for comparison
-    const availableSet = new Set(
-      availableTimes.map(t => {
-        // t could be "17:00" or "17:30", but sometimes "7:00"
-        let [hour, min] = t.split(':');
-        hour = hour.length === 1 ? '0' + hour : hour;
-        return `${hour}:${min}`;
-      })
-    );
-    // Disabled times are all times not in availableTimes
-    return allTimes.filter(t => !availableSet.has(t));
-  })();
+    return slots;
+  };
+
+  const allPossibleTimeSlots = generateTimeSlots();
 
   return (
 
@@ -152,29 +147,36 @@ function BookingForm(props) {
                   )}
                 </div>
 
+                {/* === START OF TIME SELECTION CHANGE === */}
                 <div className="mb-3">
                   <label htmlFor="time" className="form-label">
                     Time
                   </label>
-                  <div className="mb-3">
-                  <label htmlFor="time" className="form-label">
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    className={`form-control ${touched.time && errors.time ? 'is-invalid' : ''}`}
+                  <select
+                    className={`form-select ${touched.time && errors.time ? 'is-invalid' : ''}`}
                     id="time"
                     name="time"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.time}
-                  />
+                  >
+                    <option value="">Select a time slot</option> {/* Placeholder/default option */}
+                    {allPossibleTimeSlots.map(timeSlot => (
+                      <option
+                        key={timeSlot}
+                        value={timeSlot}
+                        disabled={!availableTimes.includes(timeSlot)}
+                      >
+                        {timeSlot}
+                      </option>
+                    ))}
+                  </select>
                   <div className="form-text">We are open from 8:00 AM to 10 PM.</div>
-                    {touched.time && errors.time && (
-                      <div className="invalid-feedback">{errors.time}</div>
-                    )}
-                  </div>
+                  {touched.time && errors.time && (
+                    <div className="invalid-feedback">{errors.time}</div>
+                  )}
                 </div>
+                {/* === END OF TIME SELECTION CHANGE === */}
 
                 <div className="mb-3">
                   <label htmlFor="guests" className="form-label">
