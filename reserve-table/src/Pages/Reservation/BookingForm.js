@@ -1,11 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
 import greekSalad from './GreekSalad.jpg';
+import { submitAPI ,fetchAPI } from './api';
+
 
 function BookingForm(props) {
 
+
+  // Helper to get today's date in yyyy-mm-dd format
+  const getTodayString = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
+
+  // Set initial date (today or from props)
+  const initialDate = props.formData?.date || getTodayString();
+
+  const [availableTimes, setAvailableTimes] = useState(
+    fetchAPI(new Date(initialDate))
+  );
+
   return (
+
     <Container>
       <Row style={{ backgroundColor: '#F4CE14', padding: '5%' }}>
         <Col style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
@@ -41,6 +58,7 @@ function BookingForm(props) {
               setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
+                submitAPI(values);
                 return (
                 <div>
                   <Container style={{width:"300px",height:"4000"}}>
@@ -100,7 +118,10 @@ function BookingForm(props) {
                     className={`form-control ${touched.date && errors.date ? 'is-invalid' : ''}`}
                     id="date"
                     name="date"
-                    onChange={handleChange}
+                    onChange= {e => {
+                      handleChange(e);
+                      setAvailableTimes(fetchAPI(new Date(e.target.value + 'T00:00:00')));
+                    }}
                     onBlur={handleBlur}
                     value={values.date}
                   />
@@ -122,6 +143,9 @@ function BookingForm(props) {
                     onBlur={handleBlur}
                     value={values.time}
                   />
+                  <div className="form-text">
+                    Available times for this date: {availableTimes.length > 0 ? availableTimes.join(', ') : 'None'}
+                  </div>
                   <div className="form-text">We are open from 8:00 AM to 10 PM.</div>
                   {touched.time && errors.time && (
                     <div className="invalid-feedback">{errors.time}</div>
