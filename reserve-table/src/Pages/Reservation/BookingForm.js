@@ -26,7 +26,7 @@ function BookingForm(props) {
   // Function to generate all possible time slots from 8 AM to 10 PM in 30-minute intervals
   const generateTimeSlots = () => {
     const slots = [];
-    for (let hour = 8; hour <= 22; hour++) { // 8 AM to 10 PM (22:00)
+    for (let hour = 17; hour <= 23; hour++) { // 8 AM to 10 PM (22:00)
       for (let minute = 0; minute < 60; minute += 30) {
         const h = hour < 10 ? `0${hour}` : `${hour}`;
         const m = minute === 0 ? '00' : '30';
@@ -73,9 +73,9 @@ function BookingForm(props) {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
                 submitAPI(values);
+                console.log(values);
                 return (
                 <div>
                   <Container style={{width:"300px",height:"4000"}}>
@@ -171,7 +171,7 @@ function BookingForm(props) {
                       </option>
                     ))}
                   </select>
-                  <div className="form-text">We are open from 8:00 AM to 10 PM.</div>
+                  <div className="form-text">We are open from 5:00 PM to 11 PM.</div>
                   {touched.time && errors.time && (
                     <div className="invalid-feedback">{errors.time}</div>
                   )}
