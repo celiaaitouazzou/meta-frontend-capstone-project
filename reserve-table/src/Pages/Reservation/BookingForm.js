@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useNavigate } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
 import greekSalad from './GreekSalad.jpg';
@@ -20,6 +20,7 @@ function BookingForm(props) {
 
   const initialDateString = props.formData?.date || getTodayString();
   const initialDateObject = new Date(initialDateString + 'T00:00:00');
+  
 
   const [availableTimes, setAvailableTimes] = useState(() => fetchAPI(initialDateObject));
 
@@ -41,7 +42,7 @@ function BookingForm(props) {
   return (
 
     <Container>
-      <Row style={{ backgroundColor: '#F4CE14', padding: '5%' }}>
+      <Row style={{ backgroundColor: '#F4CE14', padding: '5%' , display:'block',width:'auto',height:'auto'}}>
         <Col style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
           <Formik
             initialValues={{
@@ -74,7 +75,7 @@ function BookingForm(props) {
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
                 setSubmitting(false);
-                submitAPI(values);
+                console.log(submitAPI(values));
                 console.log(values);
                 return (
                 <div>
@@ -225,9 +226,6 @@ function BookingForm(props) {
               </Form>
             )}
           </Formik>
-        </Col>
-        <Col>
-          <img src={greekSalad} width={800} height={600} alt="greek-salad" />
         </Col>
       </Row>
     </Container>
