@@ -1,9 +1,8 @@
-import React, { useEffect, useState,useNavigate } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
-import greekSalad from './GreekSalad.jpg';
 import { submitAPI ,fetchAPI } from './api';
-import ReactTimePicker from 'react-time-picker';
+import ConfirmedBooking from './ConfirmedBooking';
 
 
 function BookingForm(props) {
@@ -20,9 +19,15 @@ function BookingForm(props) {
 
   const initialDateString = props.formData?.date || getTodayString();
   const initialDateObject = new Date(initialDateString + 'T00:00:00');
-  
 
   const [availableTimes, setAvailableTimes] = useState(() => fetchAPI(initialDateObject));
+
+  const [submittedData, setSubmittedData] = useState(null); // <-- NEW STATE
+
+  // If submittedData exists, show confirmation instead of form
+  if (submittedData) {
+    return <ConfirmedBooking submission={submittedData} />;
+  }
 
   // Function to generate all possible time slots from 8 AM to 10 PM in 30-minute intervals
   const generateTimeSlots = () => {
@@ -73,17 +78,12 @@ function BookingForm(props) {
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(true);
+              // Submit data (simulate as async for real-world)
               setTimeout(() => {
+                submitAPI(values);
+                setSubmittedData(values); // <-- Set state to trigger confirmation view
                 setSubmitting(false);
-                console.log(submitAPI(values));
-                console.log(values);
-                return (
-                <div>
-                  <Container style={{width:"300px",height:"4000"}}>
-                    {values}
-                  </Container>
-                </div>
-              )
               }, 400);
             }}
           >

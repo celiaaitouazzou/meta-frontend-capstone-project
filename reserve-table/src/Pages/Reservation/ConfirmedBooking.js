@@ -1,16 +1,24 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import Navigation from '../../Navigation.js'
-import Footer from '../../Footer.js'
 
 function ConfirmedBooking(props) {
   return (
     <>
-     <Navigation />
-    <Container>
-      <h1>Your reservation has been booked! </h1>
-      <h2>Here are the information you have tranmitted.</h2>
-      <ul>
+    <Container style={{padding:"2%",color:'#495E57', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <h1 style={{ textAlign:"center"}}>Your reservation has been booked! </h1>
+      <h2 style={{ textAlign:"center",padding:"2%"}}>Here are the information you have tranmitted.</h2>
+      <ul
+        style={{
+          fontSize:"24px",
+          border:"solid",
+          borderColor:'#495E57',
+          listStyleType:'none',
+          padding:"2%",
+          margin: "0 auto",
+          width: "fit-content",
+          textAlign: "left",
+        }}
+      >
         <li>First Name : {props.submission.firstName}</li>
         <li>Last Name : {props.submission.lastName}</li>
         <li>Date : {props.submission.date}</li>
@@ -18,8 +26,7 @@ function ConfirmedBooking(props) {
         <li>Guests Number : {props.submission.guests}</li>
         <li>Occasion : {props.submission.occasion}</li>
       </ul>
-    </Container>`
-    <Footer />
+    </Container>
     </>
   )
 }
