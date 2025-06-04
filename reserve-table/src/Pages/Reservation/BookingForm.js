@@ -3,6 +3,9 @@ import { Formik, Form } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
 import { submitAPI ,fetchAPI } from './api';
 import ConfirmedBooking from './ConfirmedBooking';
+import { db } from '../../firebase.js'; // Adjust path if your firebase.js is elsewhere
+import { submitFirestoreReservation } from '../../firestoreHelpers';
+import { collection, addDoc } from 'firebase/firestore';
 
 
 function BookingForm(props) {
@@ -77,15 +80,23 @@ function BookingForm(props) {
               }
               return errors;
             }}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
               setSubmitting(true);
-              // Submit data (simulate as async for real-world)
+
+              // Add to Firestore
+              try {
+                await addDoc(collection(db, "bookings"), values);
+              } catch (error) {
+                console.error("Error adding to Firestore:", error);
+              }
+
+              // Your existing logic
               setTimeout(() => {
                 submitAPI(values);
-                setSubmittedData(values); // <-- Set state to trigger confirmation view
+                setSubmittedData(values);
                 setSubmitting(false);
               }, 400);
-            }}
+          }}
           >
             {({ isSubmitting, values, touched, errors, handleChange, handleBlur }) => (
               <Form>
