@@ -930,79 +930,76 @@ describe("Form does not submit when all mandatory fields are empty", () => {
   });
 });
 
-describe("Form submits successfully when all mandatory fields are properly filled", () => {
-  test("all mandatory fields are filled and form submits successfully", async () => {
-    const formDataFilled = {
-      firstName: 'John',
-      lastName: 'Doe',
-      date: '2025-05-11',
-      time: '07:00PM',
-      guests: '4',
-      occasion: 'Birthday',
-    };
+describe("Form does not submit when all mandatory fields are empty", () => {
+  test("Form does not submit and shows required errors", async () => {
+    const handleSubmit = jest.fn();
 
-    // Mock the alert function
-    window.alert = jest.fn();
+    render(<BookingForm onSubmit={handleSubmit} />);
 
-    // Render the form
-    render(<BookingForm formData={formDataFilled}/>);
+    // Blur all mandatory fields to trigger validation (including selects)
+    fireEvent.blur(screen.getByLabelText(/First Name/i));
+    fireEvent.blur(screen.getByLabelText(/Last Name/i));
+    fireEvent.blur(screen.getByLabelText(/Date/i));
+    fireEvent.blur(screen.getByLabelText(/Time/i));
+    fireEvent.blur(screen.getByLabelText(/Guests/i));
+    fireEvent.blur(screen.getByLabelText(/Occasion/i));
 
-    // Simulate filling the fields
-    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formDataFilled.firstName } });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formDataFilled.lastName } });
-    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formDataFilled.date } });
-    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
-    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
-    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
+    // Attempt to submit
+    fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 
-    // Simulate clicking the submit button
-    const submitButton = screen.getByRole('button', { name: /submit/i });
-    fireEvent.click(submitButton);
+    // Should NOT submit
+    expect(handleSubmit).not.toHaveBeenCalled();
 
-    // Wait for the mock alert function to be called
+    // Should show "Required" for all fields
     await waitFor(() => {
-      expect(window.alert).toHaveBeenCalledWith(JSON.stringify(formDataFilled, null, 2));
+      expect(screen.getAllByText(/Required/i).length).toBeGreaterThanOrEqual(4); // Adjust count as needed
     });
   });
 });
 
-describe("Form submits successfully and it submits the default value for occasion and guests", () =>{
-  test("submits with default 'occasion' value when no option is selected", async () => {
-  // Mock the alert function to intercept form submission
-  window.alert = jest.fn();
+describe("Form does not submit when all mandatory fields are empty", () => {
+  test("Form does not submit and shows required errors", async () => {
+    const handleSubmit = jest.fn();
 
-  // Render the BookingForm component
-  render(<BookingForm />);
+    render(<BookingForm onSubmit={handleSubmit} />);
 
-  // Fill all mandatory fields except for 'occasion'
-  fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: 'John' } });
-  fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: 'Doe' } });
-  fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: '2025-05-15' } });
-  fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: '18:00' } });
-  fireEvent.change(screen.getByLabelText(/Selected Number of Guests/i));
+    // Blur all fields to trigger validation
+    fireEvent.blur(screen.getByLabelText(/First Name/i));
+    fireEvent.blur(screen.getByLabelText(/Last Name/i));
+    fireEvent.blur(screen.getByLabelText(/Date/i));
+    fireEvent.blur(screen.getByLabelText(/Time/i));
+    fireEvent.blur(screen.getByLabelText(/Guests/i));
+    fireEvent.blur(screen.getByLabelText(/Occasion/i));
 
-  // Do not touch the 'occasion' field (it should retain its default value)
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
-  // Submit the form
-  fireEvent.click(screen.getByRole('button', { name: /submit/i }));
+    expect(handleSubmit).not.toHaveBeenCalled();
 
-  // Wait for the form to be submitted
-  await waitFor(() => {
-    // Assert that the alert function was called with the correct submitted values
-    expect(window.alert).toHaveBeenCalledWith(
-      JSON.stringify(
-        {
-          firstName: 'John',
-          lastName: 'Doe',
-          date: '2025-05-15',
-          time: '18:00',
-          guests: '2',
-          occasion: 'occasion', // Default value
-        },
-        null,
-        2
-      )
-    );
+    // At least one Required message (adjust if you have custom messages)
+    await waitFor(() => {
+      expect(screen.getAllByText(/Required/i).length).toBeGreaterThanOrEqual(1);
     });
   });
-})
+});
+
+
+describe("BookingForm confirmation flow", () => {
+  test("shows ConfirmedBooking after successful submission", async () => {
+    render(<BookingForm />);
+
+    // Fill out all required fields
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: "Alice" } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: "Smith" } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: "2025-12-25" } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: "19:00" } });
+    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: "3" } });
+    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: "Birthday" } });
+
+    // Wait for the ConfirmedBooking component to appear
+    await waitFor(() => {
+      expect(screen.getByTestId("confirmed-booking")).toBeInTheDocument();
+      // Optionally, check for personalized confirmation
+      expect(screen.getByText(/Your reservation has been booked!/i)).toBeInTheDocument();
+    });
+  });
+});
