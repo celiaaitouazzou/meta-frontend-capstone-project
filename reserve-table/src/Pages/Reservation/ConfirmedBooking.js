@@ -4,7 +4,11 @@ import { Container,Button } from 'react-bootstrap'
 function ConfirmedBooking(props) {
   return (
     <>
-    <Container style={{padding:"2%",color:'#495E57', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <Container
+      data-testid="confirmed-booking"
+      style={{padding:"2%",color:'#495E57', display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+      label="confirmed-booking"
+    >
       <h1 style={{ textAlign:"center"}}>Your reservation has been booked! </h1>
       <h2 style={{ textAlign:"center",padding:"2%"}}>Here are the information you have tranmitted.</h2>
       <ul
