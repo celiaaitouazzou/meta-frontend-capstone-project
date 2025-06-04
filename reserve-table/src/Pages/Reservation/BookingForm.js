@@ -3,8 +3,7 @@ import { Formik, Form } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
 import { submitAPI ,fetchAPI } from './api';
 import ConfirmedBooking from './ConfirmedBooking';
-import { db } from '../../firebase.js'; // Adjust path if your firebase.js is elsewhere
-import { submitFirestoreReservation } from '../../firestoreHelpers';
+import { db } from '../../firebase.js';
 import { collection, addDoc } from 'firebase/firestore';
 
 
