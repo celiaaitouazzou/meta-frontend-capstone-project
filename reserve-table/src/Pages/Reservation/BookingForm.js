@@ -26,7 +26,7 @@ function BookingForm(props) {
 
   // If submittedData exists, show confirmation instead of form
   if (submittedData) {
-    return <ConfirmedBooking submission={submittedData} />;
+    return <ConfirmedBooking submission={submittedData} onBack={() => setSubmittedData(null)}/>;
   }
 
   // Function to generate all possible time slots from 8 AM to 10 PM in 30-minute intervals
@@ -47,7 +47,7 @@ function BookingForm(props) {
   return (
 
     <Container>
-      <Row style={{ backgroundColor: '#F4CE14', padding: '5%' , display:'block',width:'auto',height:'auto'}}>
+      <Row style={{ padding: '5%' , display:'block',width:'auto',height:'auto'}}>
         <Col style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
           <Formik
             initialValues={{

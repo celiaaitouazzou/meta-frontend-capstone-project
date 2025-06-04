@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Container,Button } from 'react-bootstrap'
 
 function ConfirmedBooking(props) {
   return (
@@ -26,6 +26,13 @@ function ConfirmedBooking(props) {
         <li>Guests Number : {props.submission.guests}</li>
         <li>Occasion : {props.submission.occasion}</li>
       </ul>
+      <Button
+        variant="outline-secondary"
+        style={{ marginTop: '2rem' }}
+        onClick={props.onBack}
+      >
+        Book another reservation
+      </Button>
     </Container>
     </>
   )
