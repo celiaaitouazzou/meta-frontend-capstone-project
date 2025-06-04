@@ -985,21 +985,81 @@ describe("Form does not submit when all mandatory fields are empty", () => {
 
 describe("BookingForm confirmation flow", () => {
   test("shows ConfirmedBooking after successful submission", async () => {
-    render(<BookingForm />);
+    // You can use formData prop if BookingForm supports it, but you still need to submit the form
+    const formDataFilled = {
+      firstName: 'John',
+      lastName: 'Doe',
+      date: '2025-06-06', // yyyy-mm-dd for <input type="date">
+      time: '19:00',
+      guests: '3',
+      occasion: 'Birthday',
+    };
 
-    // Fill out all required fields
-    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: "Alice" } });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: "Smith" } });
-    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: "2025-12-25" } });
-    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: "19:00" } });
-    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: "3" } });
-    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: "Birthday" } });
+    const handleSubmit = jest.fn();
 
-    // Wait for the ConfirmedBooking component to appear
+    const {container} = render(<BookingForm formData={formDataFilled} onSubmit={handleSubmit}/>);
+
+    // If BookingForm does not fill fields from formData automatically, fill fields manually:
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formDataFilled.firstName } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formDataFilled.lastName } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formDataFilled.date } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
+    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
+    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+
     await waitFor(() => {
-      //expect(screen.getByTestId("confirmed-booking")).toBeInTheDocument();
-      // Optionally, check for personalized confirmation
-      expect(screen.getAllByText(/Your reservation has been booked!/i)).toBeInTheDocument();
+      expect(container.querySelector('h1').textContent).toBe('Your reservation has been booked!');
+    });
+  });
+});
+
+describe("BookingForm confirmed booking summary", () => {
+  test("renders all submitted fields in the <li> tags", async () => {
+    const formDataFilled = {
+      firstName: 'John',
+      lastName: 'Doe',
+      date: '2025-06-06',
+      time: '19:00',
+      guests: '3',
+      occasion: 'Birthday',
+    };
+
+    const handleSubmit = jest.fn();
+
+    const { container } = render(
+      <BookingForm formData={formDataFilled} onSubmit={handleSubmit} />
+    );
+
+    // Fill form fields if BookingForm does not auto-fill from formData prop
+    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formDataFilled.firstName } });
+    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formDataFilled.lastName } });
+    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formDataFilled.date } });
+    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
+    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
+    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
+
+    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+
+    await waitFor(() => {
+      const ul = container.querySelector('#confirmed-booking-info');
+      expect(ul).toBeInTheDocument();
+
+      const expectedLiTexts = [
+        `First Name : ${formDataFilled.firstName}`,
+        `Last Name : ${formDataFilled.lastName}`,
+        `Date : ${formDataFilled.date}`,
+        `Time : ${formDataFilled.time}`,
+        `Guests Number : ${formDataFilled.guests}`,
+        `Occasion : ${formDataFilled.occasion}`,
+      ];
+
+      const lis = ul.querySelectorAll('li');
+      expect(lis.length).toBe(expectedLiTexts.length);
+
+      expectedLiTexts.forEach((text, i) => {
+        expect(lis[i].textContent).toBe(text);
+      });
     });
   });
 });
