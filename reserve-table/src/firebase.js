@@ -13,7 +13,7 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyCnNbJNlCNlvdBCFfik_znKubgaQb9nELA",
+  apiKey: "",
 
   authDomain: "little-lemon-reservation-400f0.firebaseapp.com",
 
