@@ -3,15 +3,14 @@ import { Container,Button } from 'react-bootstrap'
 
 function ConfirmedBooking(props) {
   return (
-    <>
-    <Container
-      data-testid="confirmed-booking"
+    <div data-testid="confirmed-booking"
       style={{padding:"2%",color:'#495E57', display: 'flex', flexDirection: 'column', alignItems: 'center'}}
       label="confirmed-booking"
     >
-      <h1 style={{ textAlign:"center"}}>Your reservation has been booked!</h1>
+      <h1 style={{ textAlign:"center"}} name='confirmation-text'>Your reservation has been booked!</h1>
       <h2 style={{ textAlign:"center",padding:"2%"}}>Here are the information you have tranmitted.</h2>
       <ul
+        id="confirmed-booking-info"
         style={{
           fontSize:"24px",
           border:"solid",
@@ -22,7 +21,6 @@ function ConfirmedBooking(props) {
           width: "fit-content",
           textAlign: "left",
         }}
-        id="confirmed-booking-info"
       >
         <li>First Name : {props.submission.firstName}</li>
         <li>Last Name : {props.submission.lastName}</li>
@@ -38,8 +36,7 @@ function ConfirmedBooking(props) {
       >
         Book another reservation
       </Button>
-    </Container>
-    </>
+    </div>
   )
 }
 

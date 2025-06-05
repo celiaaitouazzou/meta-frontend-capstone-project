@@ -18,3 +18,7 @@ jest.mock('react-router', () => ({
     </a>
   ), // Mock NavLink as a basic anchor tag
 }));
+
+if (typeof setImmediate === "undefined") {
+  global.setImmediate = (fn, ...args) => setTimeout(fn, 0, ...args);
+}

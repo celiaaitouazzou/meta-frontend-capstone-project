@@ -80,7 +80,12 @@ function BookingForm(props) {
               return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-              setSubmitting(true);
+
+              setTimeout(() => {
+              submitAPI(values);
+              setSubmittedData(values);
+              setSubmitting(false);
+              }, 400);
 
               // Add to Firestore
               try {
@@ -88,13 +93,6 @@ function BookingForm(props) {
               } catch (error) {
                 console.error("Error adding to Firestore:", error);
               }
-
-              // Your existing logic
-              setTimeout(() => {
-                submitAPI(values);
-                setSubmittedData(values);
-                setSubmitting(false);
-              }, 400);
           }}
           >
             {({ isSubmitting, values, touched, errors, handleChange, handleBlur }) => (

@@ -1,6 +1,7 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import BookingForm from './BookingForm'; // Adjust the import path if necessary
 import { waitFor } from '@testing-library/react';
+import ConfirmedBooking from './ConfirmedBooking';
 
 describe("If one required field is empty, the form does not submit and shows 'required'", () => {
   test("first Name is empty", async () => {
@@ -1009,39 +1010,10 @@ describe("BookingForm confirmation flow", () => {
     fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
     await waitFor(() => {
-      expect(container.querySelector('h1').textContent).toBe('Your reservation has been booked!');
-    });
-  });
-});
+      // Using screen (recommended)
+      const heading = screen.getByRole('heading', { level: 1 });
+      expect(heading.textContent).toBe('Your reservation has been booked!'); // logs the text of the h1
 
-describe("BookingForm confirmed booking summary", () => {
-  test("renders all submitted fields in the <li> tags", async () => {
-    const formDataFilled = {
-      firstName: 'John',
-      lastName: 'Doe',
-      date: '2025-06-06',
-      time: '19:00',
-      guests: '3',
-      occasion: 'Birthday',
-    };
-
-    const handleSubmit = jest.fn();
-
-    const { container } = render(
-      <BookingForm formData={formDataFilled} onSubmit={handleSubmit} />
-    );
-
-    // Fill form fields if BookingForm does not auto-fill from formData prop
-    fireEvent.change(screen.getByLabelText(/First Name/i), { target: { value: formDataFilled.firstName } });
-    fireEvent.change(screen.getByLabelText(/Last Name/i), { target: { value: formDataFilled.lastName } });
-    fireEvent.change(screen.getByLabelText(/Date/i), { target: { value: formDataFilled.date } });
-    fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
-    fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
-    fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
-
-    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
-
-    await waitFor(() => {
       const ul = container.querySelector('#confirmed-booking-info');
       expect(ul).toBeInTheDocument();
 
@@ -1061,5 +1033,7 @@ describe("BookingForm confirmed booking summary", () => {
         expect(lis[i].textContent).toBe(text);
       });
     });
+
   });
 });
+
