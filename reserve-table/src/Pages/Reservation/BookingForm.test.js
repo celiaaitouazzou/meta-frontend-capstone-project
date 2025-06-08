@@ -1007,9 +1007,9 @@ describe("BookingForm confirmation flow", () => {
     fireEvent.change(screen.getByLabelText(/Time/i), { target: { value: formDataFilled.time } });
     fireEvent.change(screen.getByLabelText(/Guests/i), { target: { value: formDataFilled.guests } });
     fireEvent.change(screen.getByLabelText(/Occasion/i), { target: { value: formDataFilled.occasion } });
-    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
 
-    await waitFor(() => {
+    await(() => {
+      fireEvent.click(screen.getByRole("button", { name: /submit/i }));
       // Using screen (recommended)
       const heading = screen.getByRole('heading', { level: 1 });
       expect(heading.textContent).toBe('Your reservation has been booked!'); // logs the text of the h1
