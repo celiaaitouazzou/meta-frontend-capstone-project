@@ -13,7 +13,11 @@ function BookingPage() {
   };
 
   return (
-    <div>
+    <div
+      role="main"
+      aria-label="Booking Page"
+      tabIndex={-1}
+    >
       <BookingForm formData={formData} />
     </div>
   );
