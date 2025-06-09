@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
-import { Button, Row, Col, Container } from 'react-bootstrap'; // Still using Container, Row, Col for layout
-import { submitAPI ,fetchAPI } from './api';
+import { Button, Row, Col, Container } from 'react-bootstrap';
+import { submitAPI, fetchAPI } from './api';
 import ConfirmedBooking from './ConfirmedBooking';
 import { db } from '../../firebase.js';
 import { collection, addDoc } from 'firebase/firestore';
 
-
 function BookingForm(props) {
-
-
   /// Helper to get today's date in YYYY-MM-DD format
   const getTodayString = () => {
     const today = new Date();
@@ -23,18 +20,17 @@ function BookingForm(props) {
   const initialDateObject = new Date(initialDateString + 'T00:00:00');
 
   const [availableTimes, setAvailableTimes] = useState(() => fetchAPI(initialDateObject));
-
-  const [submittedData, setSubmittedData] = useState(null); // <-- NEW STATE
+  const [submittedData, setSubmittedData] = useState(null);
 
   // If submittedData exists, show confirmation instead of form
   if (submittedData) {
-    return <ConfirmedBooking submission={submittedData} onBack={() => setSubmittedData(null)}/>;
+    return <ConfirmedBooking submission={submittedData} onBack={() => setSubmittedData(null)} />;
   }
 
-  // Function to generate all possible time slots from 8 AM to 10 PM in 30-minute intervals
+  // Function to generate all possible time slots from 5 PM to 11 PM in 30-minute intervals
   const generateTimeSlots = () => {
     const slots = [];
-    for (let hour = 17; hour <= 23; hour++) { // 8 AM to 10 PM (22:00)
+    for (let hour = 17; hour <= 23; hour++) {
       for (let minute = 0; minute < 60; minute += 30) {
         const h = hour < 10 ? `0${hour}` : `${hour}`;
         const m = minute === 0 ? '00' : '30';
@@ -47,9 +43,13 @@ function BookingForm(props) {
   const allPossibleTimeSlots = generateTimeSlots();
 
   return (
-
-    <Container>
-      <Row style={{ padding: '5%' , display:'block',width:'auto',height:'auto'}}>
+    <Container
+      as="section"
+      aria-label="Booking Form"
+      role="form"
+      tabIndex={-1}
+    >
+      <Row style={{ padding: '5%', display: 'block', width: 'auto', height: 'auto' }}>
         <Col style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'baseline' }}>
           <Formik
             initialValues={{
@@ -80,7 +80,6 @@ function BookingForm(props) {
               return errors;
             }}
             onSubmit={async (values, { setSubmitting }) => {
-
               setSubmitting(true);
 
               // Add to Firestore
@@ -96,13 +95,22 @@ function BookingForm(props) {
                 setSubmittedData(values);
                 setSubmitting(false);
               }, 400);
-
             }}
           >
             {({ isSubmitting, values, touched, errors, handleChange, handleBlur }) => (
-              <Form>
+              <Form aria-labelledby="booking-form-title" aria-describedby="booking-form-desc">
+                <h2
+                  id="booking-form-title"
+                  style={{ fontFamily: 'Markazi Text', fontWeight: 'bold', fontSize: '2rem' }}
+                  aria-level="1"
+                >
+                  Reserve a Table
+                </h2>
+                <p id="booking-form-desc" className="mb-4">
+                  Fill out the form below to book your reservation at Little Lemon.
+                </p>
                 <div className="mb-3">
-                  <label htmlFor="firstName" className="form-label">
+                  <label htmlFor="firstName" className="form-label" aria-label="First Name">
                     First Name
                   </label>
                   <input
@@ -111,17 +119,20 @@ function BookingForm(props) {
                     id="firstName"
                     name="firstName"
                     placeholder="First Name"
+                    aria-required="true"
+                    aria-invalid={!!(touched.firstName && errors.firstName)}
+                    aria-describedby={touched.firstName && errors.firstName ? "firstName-error" : undefined}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.firstName}
                   />
                   {touched.firstName && errors.firstName && (
-                    <div className="invalid-feedback">{errors.firstName}</div>
+                    <div className="invalid-feedback" id="firstName-error" aria-live="polite">{errors.firstName}</div>
                   )}
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="lastName" className="form-label">
+                  <label htmlFor="lastName" className="form-label" aria-label="Last Name">
                     Last Name
                   </label>
                   <input
@@ -130,17 +141,20 @@ function BookingForm(props) {
                     id="lastName"
                     name="lastName"
                     placeholder="Last Name"
+                    aria-required="true"
+                    aria-invalid={!!(touched.lastName && errors.lastName)}
+                    aria-describedby={touched.lastName && errors.lastName ? "lastName-error" : undefined}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.lastName}
                   />
                   {touched.lastName && errors.lastName && (
-                    <div className="invalid-feedback">{errors.lastName}</div>
+                    <div className="invalid-feedback" id="lastName-error" aria-live="polite">{errors.lastName}</div>
                   )}
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="date" className="form-label">
+                  <label htmlFor="date" className="form-label" aria-label="Date">
                     Date
                   </label>
                   <input
@@ -148,7 +162,10 @@ function BookingForm(props) {
                     className={`form-control ${touched.date && errors.date ? 'is-invalid' : ''}`}
                     id="date"
                     name="date"
-                    onChange= {e => {
+                    aria-required="true"
+                    aria-invalid={!!(touched.date && errors.date)}
+                    aria-describedby={touched.date && errors.date ? "date-error" : undefined}
+                    onChange={e => {
                       handleChange(e);
                       setAvailableTimes(fetchAPI(new Date(e.target.value + 'T00:00:00')));
                     }}
@@ -156,43 +173,45 @@ function BookingForm(props) {
                     value={values.date}
                   />
                   {touched.date && errors.date && (
-                    <div className="invalid-feedback">{errors.date}</div>
+                    <div className="invalid-feedback" id="date-error" aria-live="polite">{errors.date}</div>
                   )}
                 </div>
 
-                {/* === START OF TIME SELECTION CHANGE === */}
                 <div className="mb-3">
-                  <label htmlFor="time" className="form-label">
+                  <label htmlFor="time" className="form-label" aria-label="Time">
                     Time
                   </label>
                   <select
                     className={`form-select ${touched.time && errors.time ? 'is-invalid' : ''}`}
                     id="time"
                     name="time"
+                    aria-required="true"
+                    aria-invalid={!!(touched.time && errors.time)}
+                    aria-describedby={touched.time && errors.time ? "time-error" : undefined}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.time}
                   >
-                    <option value="">Select a time slot</option> {/* Placeholder/default option */}
+                    <option value="">Select a time slot</option>
                     {allPossibleTimeSlots.map(timeSlot => (
                       <option
                         key={timeSlot}
                         value={timeSlot}
                         disabled={!availableTimes.includes(timeSlot)}
+                        aria-disabled={!availableTimes.includes(timeSlot)}
                       >
                         {timeSlot}
                       </option>
                     ))}
                   </select>
-                  <div className="form-text">We are open from 5:00 PM to 11 PM.</div>
+                  <div className="form-text" id="time-help">We are open from 5:00 PM to 11 PM.</div>
                   {touched.time && errors.time && (
-                    <div className="invalid-feedback">{errors.time}</div>
+                    <div className="invalid-feedback" id="time-error" aria-live="polite">{errors.time}</div>
                   )}
                 </div>
-                {/* === END OF TIME SELECTION CHANGE === */}
 
                 <div className="mb-3">
-                  <label htmlFor="guests" className="form-label">
+                  <label htmlFor="guests" className="form-label" aria-label={`Selected number of guests: ${values.guests}`}>
                     Selected Number of Guests: {values.guests}
                   </label>
                   <input
@@ -203,24 +222,30 @@ function BookingForm(props) {
                     min="1"
                     max="12"
                     step="1"
+                    aria-valuenow={values.guests}
+                    aria-valuemin="1"
+                    aria-valuemax="12"
+                    aria-invalid={!!(touched.guests && errors.guests)}
+                    aria-describedby={touched.guests && errors.guests ? "guests-error" : undefined}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.guests}
                   />
-                  <div className="form-text">We can accommodate up to 12 people parties.</div>
+                  <div className="form-text" id="guests-help">We can accommodate up to 12 people parties.</div>
                   {touched.guests && errors.guests && (
-                    <div className="invalid-feedback">{errors.guests}</div>
+                    <div className="invalid-feedback" id="guests-error" aria-live="polite">{errors.guests}</div>
                   )}
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="occasion" className="form-label">
+                  <label htmlFor="occasion" className="form-label" aria-label="Select an Occasion">
                     Select an Occasion
                   </label>
                   <select
                     className="form-select"
                     id="occasion"
                     name="occasion"
+                    aria-required="false"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.occasion}
@@ -232,7 +257,14 @@ function BookingForm(props) {
                   </select>
                 </div>
 
-                <Button variant="dark" type="submit" disabled={isSubmitting}>
+                <Button
+                  variant="dark"
+                  type="submit"
+                  disabled={isSubmitting}
+                  aria-label="Submit reservation"
+                  aria-busy={isSubmitting}
+                  role="button"
+                >
                   Submit
                 </Button>
               </Form>
