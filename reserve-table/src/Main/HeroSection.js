@@ -1,6 +1,8 @@
 import React from 'react'
 import { Row, Col, Image, Container, Button } from 'react-bootstrap';
 import hero from './assets/hero.png';
+import Nav from 'react-bootstrap/Nav';
+import { Link} from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -37,13 +39,21 @@ function HeroSection() {
               It’s casual, it’s intimate, it’s where the playlist hits just right and the plates are made to be shared.
               Come for the hummus, stay for the limoncello.
             </p>
-            <Button
-              className="Hero-button text-white bg-dark border-light shadow-none mt-3"
-              aria-label="Reserve a table at Little Lemon"
-              role="button"
-            >
-              Reserve A Table
-            </Button>
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/Reservation"
+                className="nav-link text-dark"
+              >
+                <Button
+                  className="Hero-button text-white bg-dark border-light shadow-none mt-3"
+                  aria-label="Reserve a table at Little Lemon"
+                  role="button"
+                >
+                  Reserve A Table
+                </Button>
+              </Nav.Link>
+            </Nav.Item>
           </div>
         </Col>
         {/* Desktop image */}
