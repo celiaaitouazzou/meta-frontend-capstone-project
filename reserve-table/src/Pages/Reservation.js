@@ -1,17 +1,32 @@
 import React from 'react'
 import Navigation from '../Navigation'
 import Footer from '../Footer'
-import BookingPage from './Reservation/BookingPage.js'
+import BookingForm from './Reservation/BookingForm.js';
 
 
 function Reservation() {
+  const formData = {
+    firstName: '',
+    lastName: '',
+    date: '',
+    time: '',
+    guests: 2,
+    occasion: '',
+  };
+
   return (
-    <div>
-      <Navigation />
-      <BookingPage/>
-      <Footer />
+    <>
+    <Navigation />
+    <div
+      role="main"
+      aria-label="Booking Page"
+      tabIndex={-1}
+    >
+      <BookingForm formData={formData} />
     </div>
-  )
+    <Footer />
+    </>
+  );
 }
 
 export default Reservation

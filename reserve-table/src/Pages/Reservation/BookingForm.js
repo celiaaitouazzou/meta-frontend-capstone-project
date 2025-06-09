@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef , useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import { Button, Row, Col, Container } from 'react-bootstrap';
 import { submitAPI, fetchAPI } from './api';
@@ -21,11 +21,13 @@ function BookingForm(props) {
 
   const [availableTimes, setAvailableTimes] = useState(() => fetchAPI(initialDateObject));
   const [submittedData, setSubmittedData] = useState(null);
+  const confirmationRef = useRef(null);
 
-  // If submittedData exists, show confirmation instead of form
-  if (submittedData) {
-    return <ConfirmedBooking submission={submittedData} onBack={() => setSubmittedData(null)} />;
-  }
+  useEffect(() => {
+    if (submittedData && confirmationRef.current) {
+      confirmationRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [submittedData]);
 
   // Function to generate all possible time slots from 5 PM to 11 PM in 30-minute intervals
   const generateTimeSlots = () => {
@@ -79,12 +81,13 @@ function BookingForm(props) {
               }
               return errors;
             }}
-            onSubmit={async (values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting,resetForm }) => {
               setSubmitting(true);
 
               // Add to Firestore
               try {
                 await addDoc(collection(db, "bookings"), values);
+                
               } catch (error) {
                 console.error("Error adding to Firestore:", error);
               }
@@ -94,6 +97,7 @@ function BookingForm(props) {
                 submitAPI(values);
                 setSubmittedData(values);
                 setSubmitting(false);
+                resetForm();
               }, 400);
             }}
           >
@@ -272,6 +276,11 @@ function BookingForm(props) {
           </Formik>
         </Col>
       </Row>
+      {submittedData && (
+        <div ref={confirmationRef}>
+          <ConfirmedBooking submission={submittedData} onBack={() => setSubmittedData(null)} />
+        </div>
+      )}
     </Container>
   );
 }

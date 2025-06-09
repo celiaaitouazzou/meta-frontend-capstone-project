@@ -2,6 +2,10 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 
 function ConfirmedBooking(props) {
+  const handleBookAnother = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top smoothly
+    props.onBack(); // Go back to the form
+  };
   return (
     <div
       data-testid="confirmed-booking"
@@ -58,7 +62,7 @@ function ConfirmedBooking(props) {
       <Button
         variant="outline-secondary"
         style={{ marginTop: '2rem' }}
-        onClick={props.onBack}
+        onClick={handleBookAnother}
         aria-label="Book another reservation"
         role="button"
       >
